@@ -40,6 +40,6 @@ background: #fff;
 const StyledContainer = styled.div`
 min-height: 520px;
 max-width: 1366px;
-padding: 24px;
+padding: 24px 0px 24px 0px;
 margin: auto;
 `

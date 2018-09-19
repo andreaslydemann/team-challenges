@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { MainLayout } from '../components';
 import styled from 'styled-components';
+import i18n from '../strings/i18n';
 import img from '../../assets/yay.jpg';
 
 interface Props {
@@ -14,7 +15,7 @@ export function PageNotFound({
     return (
         <MainLayout location={location}>
             <StyledContainer>
-                <StyledTitle>Page was not found!</StyledTitle>
+                <StyledTitle>{i18n.t('glossary:pageNotFound')}</StyledTitle>
                 <StyledImage />
             </StyledContainer>
         </MainLayout>

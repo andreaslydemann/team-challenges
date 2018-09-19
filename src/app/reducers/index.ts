@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import { RootState } from './state';
 import { challengeReducer } from './challenges';
+import { ratingReducer } from './ratings';
+import { submissionReducer } from './submissions';
 import { routerReducer, RouterState } from 'react-router-redux';
 
 export { RootState, RouterState };
@@ -9,5 +11,7 @@ export { RootState, RouterState };
 // doesn't go well with redux@4
 export const rootReducer = combineReducers<RootState>({
   challenges: challengeReducer as any,
+  ratings: ratingReducer as any,
+  submissions: submissionReducer as any,
   router: routerReducer as any
 });

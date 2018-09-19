@@ -2,48 +2,59 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router-dom';
-import { ChallengeActions } from '../actions';
+import { ChallengeActions, RatingActions, SubmissionActions } from '../actions';
 import { RootState } from '../reducers';
-import { MainLayout } from '../components';
+import { MainLayout, ChallengesTable } from '../components';
+import * as selectors from '../selectors';
 import styled from 'styled-components'
 import i18n from '../strings/i18n';
-// import { ChallengeModel } from '../models';
 import { omit } from '../utils';
+import { ChallengeModel } from '../models';
 
-export namespace Challenges {
-    export interface Props extends RouteComponentProps<void> {
-        challenges: RootState.ChallengeState;
-        actions: ChallengeActions;
-    }
+interface Props extends RouteComponentProps<void> {
+    tableData: ChallengeModel.ChallengeTableData[];
+    state: RootState.ChallengeState;
+    challengeActions: ChallengeActions;
+    ratingActions: RatingActions;
+    submissionActions: SubmissionActions;
 }
 
-export class Challenges extends React.Component<Challenges.Props> {
-    constructor(props: Challenges.Props, context?: any) {
+@connect(mapStateToProps, mapDispatchToProps)
+export class Challenges extends React.Component<Props> {
+    constructor(props: Props, context?: any) {
         super(props, context);
     }
 
-    render() {
-        // const { challenges, actions } = this.props;
+    componentWillMount() {
+        this.props.challengeActions.getChallenges()
+        this.props.ratingActions.getRatingsOfTeam("123t")
+        this.props.submissionActions.getSubmissionsOfTeam("123t")
+    }
 
+    render() {
         return (
             <MainLayout location={location}>
                 <StyledContainer>
                     <StyledTitle>{i18n.t('glossary:challengesTitle')}</StyledTitle>
+                    <ChallengesTable data={this.props.tableData} />
                 </StyledContainer>
             </MainLayout>
         );
     }
 }
 
-function mapStateToProps(state: RootState): Pick<Challenges.Props, 'challenges'> {
-    return {
-        challenges: state.challenges,
-    };
+function mapStateToProps(state: RootState): Pick<Props, 'state' | 'tableData'> {
+    const tableData = selectors.getChallengeTableData(state);
+
+    return { state: state.challenges, tableData };
 }
 
-function mapDispatchToProps(dispatch: Dispatch): Pick<Challenges.Props, 'actions'> {
+function mapDispatchToProps(dispatch: Dispatch<RootState.ChallengeState>):
+    Pick<Props, 'challengeActions' | 'ratingActions' | 'submissionActions'> {
     return {
-        actions: bindActionCreators(omit(ChallengeActions, 'Type'), dispatch)
+        challengeActions: bindActionCreators(omit(ChallengeActions, 'Type'), dispatch),
+        ratingActions: bindActionCreators(omit(RatingActions, 'Type'), dispatch),
+        submissionActions: bindActionCreators(omit(SubmissionActions, 'Type'), dispatch)
     };
 }
 
@@ -55,5 +66,3 @@ font-size: 2.5rem;
 font-weight: normal;
 letter-spacing: -1px;
 `
-
-export default connect(mapStateToProps, mapDispatchToProps)(Challenges);

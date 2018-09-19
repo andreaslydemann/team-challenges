@@ -1,5 +1,5 @@
 {
-  "name": "code-challenger",
+  "name": "team-challenges",
   "version": "1.0.0",
   "private": true,
   "description": "This project is really great!",
@@ -8,15 +8,16 @@
     "axios": "^0.18.0",
     "i18next": "^11.9.0",
     "i18next-browser-languagedetector": "^2.2.3",
+    "lodash": "^4.17.11",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts-ts": "2.17.0",
-    "redux": "^4.0.0",
+    "redux": "3.7.2",
     "redux-actions": "^2.6.1",
-    "redux-thunk": "^2.3.0",
+    "redux-thunk": "2.2.0",
     "styled-components": "^3.4.6"
   },
   "scripts": {
@@ -29,6 +30,7 @@
     "@types/i18next": "^8.4.5",
     "@types/i18next-browser-languagedetector": "^2.0.1",
     "@types/jest": "^23.3.2",
+    "@types/lodash": "^4.14.116",
     "@types/node": "^10.9.4",
     "@types/react": "^16.4.14",
     "@types/react-dom": "^16.0.7",

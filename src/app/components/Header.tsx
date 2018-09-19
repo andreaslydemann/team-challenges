@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Menu, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import i18n from '../strings/i18n';
 
 interface Props {
     location: Location
@@ -18,13 +19,13 @@ export function Header({ location }: Props) {
                 defaultSelectedKeys={[location.pathname]}
             >
                 <StyledMenuItem key="/challenges">
-                    <Link to="/challenges"><Icon type="schedule" />Challenges</Link>
+                    <Link to="/challenges"><Icon type="schedule" />{i18n.t('common:headerItemChallenges')}</Link>
                 </StyledMenuItem>
                 <StyledMenuItem key="/teams">
-                    <Link to="/teams"><Icon type="team" />Teams</Link>
+                    <Link to="/teams"><Icon type="team" />{i18n.t('common:headerItemTeams')}</Link>
                 </StyledMenuItem>
                 <StyledRightMenuItem key="/sign-in">
-                    <Link to="/sign-in"><Icon type="arrow-right" />Sign out</Link>
+                    <Link to="/sign-in"><Icon type="arrow-right" />{i18n.t('common:headerItemSignOut')}</Link>
                 </StyledRightMenuItem>
             </StyledMenu>
         </StyledHeader>

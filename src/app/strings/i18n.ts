@@ -8,6 +8,9 @@ i18n
         lng: "en",
         fallbackLng: "en",
         debug: true,
+        // common.json -> Things that are reused everywhere, eg. Button labels 'save', 'cancel'
+        // glossary.json -> Words we want to be reused consistent inside texts
+        // validation.json -> All validation texts
         ns: ["common", "glossary", "validation"],
         resources: locales,
         interpolation: { escapeValue: false },

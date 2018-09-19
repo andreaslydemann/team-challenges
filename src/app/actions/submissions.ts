@@ -1,0 +1,55 @@
+// import { createAction } from 'redux-actions';
+import { Action, ActionCreator, Dispatch } from 'redux';
+import { ThunkAction } from 'redux-thunk';
+import { RootState } from '../reducers/state';
+import { SubmissionModel } from '../models/SubmissionModel';
+
+export namespace SubmissionActions {
+    export enum Type {
+        GET_SUBMISSIONS = 'GET_SUBMISSIONS',
+        GET_SUBMISSIONS_SUCCESS = 'GET_SUBMISSIONS_SUCCESS',
+        GET_SUBMISSIONS_OF_TEAM = 'GET_SUBMISSIONS_OF_TEAM',
+        GET_SUBMISSIONS_OF_TEAM_SUCCESS = 'GET_SUBMISSIONS_OF_TEAM_SUCCESS',
+    }
+
+    export const getSubmissions: ActionCreator<ThunkAction<Action, RootState.SubmissionState, void>> = () => {
+        return (dispatch: Dispatch<RootState.SubmissionState>): Action => {
+
+            dispatch({
+                type: Type.GET_SUBMISSIONS
+            });
+
+            const name = "hello";
+
+
+            return dispatch({
+                type: Type.GET_SUBMISSIONS_SUCCESS,
+                payload: { name }
+            });
+        };
+    };
+
+    export const getSubmissionsOfTeam: ActionCreator<ThunkAction<Action, RootState.SubmissionState, void>> = (teamId: string) => {
+        return (dispatch: Dispatch<RootState.SubmissionState>): Action => {
+
+            dispatch({
+                type: Type.GET_SUBMISSIONS_OF_TEAM
+            });
+
+            const submissions = [{
+                id: "su1",
+                status: SubmissionModel.Status.EVALUATED,
+                createdAt: new Date(),
+                challengeId: "ch1",
+                teamId: "team1"
+            }]
+
+            return dispatch({
+                type: Type.GET_SUBMISSIONS_OF_TEAM_SUCCESS,
+                payload: submissions
+            });
+        };
+    };
+}
+
+export type SubmissionActions = Omit<typeof SubmissionActions, 'Type'>;

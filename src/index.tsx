@@ -7,7 +7,6 @@ import { configureStore } from './app/store';
 import registerServiceWorker from './setup/registerServiceWorker';
 import { App } from './app';
 
-// prepare store
 const history = createBrowserHistory();
 const store = configureStore(history);
 
