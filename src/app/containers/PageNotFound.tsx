@@ -15,7 +15,7 @@ export function PageNotFound({
     return (
         <MainLayout location={location}>
             <StyledContainer>
-                <StyledTitle>{i18n.t('glossary:pageNotFound')}</StyledTitle>
+                <StyledTitle>{i18n.t('validation:pageNotFound')}</StyledTitle>
                 <StyledImage />
             </StyledContainer>
         </MainLayout>

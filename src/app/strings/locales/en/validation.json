@@ -1,2 +1,6 @@
 {
+    "challengeNotFound": "Challenge not found",
+    "pageNotFound": "Page not found",    
+    "submissionUploadFail": "file upload failed.",
+    "submissionUploadSuccess": "file uploaded successfully."
 }

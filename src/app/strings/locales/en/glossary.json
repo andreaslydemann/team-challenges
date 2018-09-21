@@ -1,5 +1,6 @@
 {
-    "footer": "Team Challenges ©2018 Created by DCX, Brabrand",
     "challengesTitle": "Challenges",
-    "pageNotFound": "Page not found"
+    "footer": "Team Challenges ©2018 Created by DCX, Brabrand",
+    "submissionUploadHint1": "Click or drag file to this area to upload",
+    "submissionUploadHint2": "Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files"
 }

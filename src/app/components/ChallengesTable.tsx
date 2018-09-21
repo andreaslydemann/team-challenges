@@ -55,13 +55,13 @@ export class ChallengesTable extends React.Component<Props, State> {
                             onClick={handleSearch(selectedKeys, confirm)}
                             style={ButtonStyle}
                         >
-                            {i18n.t('common:search')}
+                            {i18n.t('common:searchButton')}
                         </Button>
                         <Button
                             onClick={handleReset(clearFilters)}
                             style={ButtonStyle}
                         >
-                            {i18n.t('common:reset')}
+                            {i18n.t('common:resetButton')}
                         </Button>
                     </StyledContainer>
                 ),
@@ -97,7 +97,7 @@ export class ChallengesTable extends React.Component<Props, State> {
             key: 'timeline',
             render: (date: Date) => {
                 if (date !== null) {
-                    return <span>Completed {date.toDateString()}</span>
+                    return <span>{i18n.t('common:tableColumnTimelineCompleted')} {date.toDateString()}</span>
                 } else { return <span /> }
             },
         }, {
@@ -118,8 +118,7 @@ export class ChallengesTable extends React.Component<Props, State> {
             key: 'action',
             dataIndex: '',
             render: (text: string, record: any) => (
-                <Button onClick={() => this.props.showChallengeDetails(record.key)}>{i18n.t('common:tableColumnShow')}</Button>
-                
+                <Button onClick={() => this.props.showChallengeDetails(record.key)}>{i18n.t('common:tableColumnShow')}</Button>                
             ),
         }];
 

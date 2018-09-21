@@ -62,7 +62,7 @@ export namespace ChallengeActions {
         const i = challenge.findIndex(x => x.id === id)
 
         if (i === -1) {
-          throw (new Error("Challenge not found"))
+          throw (new Error('validation:challengeNotFound'))
         }
 
         return dispatch({

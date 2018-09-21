@@ -45,7 +45,7 @@ export class ChallengeDetails extends React.Component<Props> {
             <MainLayout location={location}>
                 <div>
                     {this.props.state.error ? (
-                        <StyledTitle>{this.props.state.error}</StyledTitle>
+                        <StyledTitle>{i18n.t(this.props.state.error)}</StyledTitle>
                     ) : (
                             <div>
                                 <StyledTitle>{this.props.state.challenges[0].name}</StyledTitle>
@@ -53,11 +53,7 @@ export class ChallengeDetails extends React.Component<Props> {
                                 <ChallengesTable isChallengeDetailsTable={true} data={this.props.tableData} />
                                 <Button
                                     onClick={() => { this.props.history.push(this.props.location.pathname + '/submission') }}
-                                    style={{
-                                        float: 'right',
-                                        width: '112px',
-                                        marginBottom: '15px'
-                                    }}>{i18n.t('common:submission')}</Button>
+                                    style={ButtonStyle}>{i18n.t('common:submissionButton')}</Button>
                             </div>
                         )}
                 </div>
@@ -81,3 +77,9 @@ function mapDispatchToProps(dispatch: Dispatch<RootState.ChallengeState>):
         teamActions: bindActionCreators(omit(TeamActions, 'Type'), dispatch)
     };
 }
+
+const ButtonStyle: React.CSSProperties = {
+    float: "right",
+    width: "112px",
+    marginBottom: "15px"
+};
