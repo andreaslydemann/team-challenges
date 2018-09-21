@@ -4,7 +4,9 @@ import i18n from '../strings/i18n';
 import { Table, Input, Button, Icon } from 'antd';
 
 interface Props {
-    data: object[]
+    data: object[],
+    isChallengeDetailsTable?: boolean,
+    showChallengeDetails?: ((record: any) => void)
 }
 
 interface State {
@@ -34,15 +36,15 @@ export class ChallengesTable extends React.Component<Props, State> {
         }
 
         const columns = [{
-            title: i18n.t('common:tableColumnName'),
-            dataIndex: 'name',
-            key: 'name',
+            title: this.props.isChallengeDetailsTable ? i18n.t('common:tableColumnTeam') : i18n.t('common:tableColumnName'),
+            dataIndex: this.props.isChallengeDetailsTable ? 'team' : 'name',
+            key: this.props.isChallengeDetailsTable ? 'team' : 'name',
             filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }:
                 { setSelectedKeys: (array: any[]) => any, selectedKeys: number[], confirm: () => void, clearFilters: () => void }) => (
                     <StyledContainer>
                         <Input
                             ref={ele => searchInput = ele}
-                            placeholder={i18n.t('common:searchNamePlaceholder')}
+                            placeholder={this.props.isChallengeDetailsTable ? i18n.t('common:searchTeamPlaceholder') : i18n.t('common:searchNamePlaceholder')}
                             value={selectedKeys[0]}
                             onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
                             onPressEnter={handleSearch(selectedKeys, confirm)}
@@ -64,7 +66,8 @@ export class ChallengesTable extends React.Component<Props, State> {
                     </StyledContainer>
                 ),
             filterIcon: (filtered: boolean) => <Icon type="search" style={{ color: filtered ? '#108ee9' : '#aaa' }} />,
-            onFilter: (value: string, record: any) => record.name.toLowerCase().includes(value.toLowerCase()),
+            onFilter: (value: string, record: any) => this.props.isChallengeDetailsTable ?
+                record.team.toLowerCase().includes(value.toLowerCase()) : record.name.toLowerCase().includes(value.toLowerCase()),
             onFilterDropdownVisibleChange: (visible: boolean) => {
                 if (visible) {
                     setTimeout(() => {
@@ -113,12 +116,15 @@ export class ChallengesTable extends React.Component<Props, State> {
         }, {
             title: '',
             key: 'action',
+            dataIndex: '',
             render: (text: string, record: any) => (
-                <span>
-                    <a href="javascript:;">{i18n.t('common:tableColumnShow')}</a>
-                </span>
+                <Button onClick={() => this.props.showChallengeDetails(record.key)}>{i18n.t('common:tableColumnShow')}</Button>
+                
             ),
         }];
+
+        if (this.props.isChallengeDetailsTable)
+            columns.pop()
 
         return (
             <Table columns={columns} dataSource={this.props.data} />

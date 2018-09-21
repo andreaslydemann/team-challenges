@@ -7,8 +7,13 @@ export namespace RatingActions {
   export enum Type {
     GET_RATINGS = 'GET_RATINGS',
     GET_RATINGS_SUCCESS = 'GET_RATINGS_SUCCESS',
+    GET_RATINGS_FAIL = 'GET_RATINGS_FAIL',
     GET_RATINGS_OF_TEAM = 'GET_RATINGS_OF_TEAM',
-    GET_RATINGS_OF_TEAM_SUCCESS = 'GET_RATINGS_OF_TEAM_SUCCESS',
+    GET_RATINGS_OF_TEAM_SUCCESS = 'GET_RATINGS_OF_TEAM_SUCCESS',    
+    GET_RATINGS_OF_TEAM_FAIL = 'GET_RATINGS_OF_TEAM_FAIL',
+    GET_RATINGS_OF_CHALLENGE = 'GET_RATINGS_OF_CHALLENGE',
+    GET_RATINGS_OF_CHALLENGE_SUCCESS = 'GET_RATINGS_OF_CHALLENGE_SUCCESS',    
+    GET_RATINGS_OF_CHALLENGE_FAIL = 'GET_RATINGS_OF_CHALLENGE_FAIL',
   }
 
   export const getRatings: ActionCreator<ThunkAction<Action, RootState.RatingState, void>> = () => {
@@ -18,12 +23,16 @@ export namespace RatingActions {
         type: Type.GET_RATINGS
       });
 
-      const name = "hello";
-
+      const ratings = [{
+        id: "ra1",
+        scorePercentage: 10,
+        comment: "Not bad",
+        submissionId: "su1"
+      }]
 
       return dispatch({
         type: Type.GET_RATINGS_SUCCESS,
-        payload: { name }
+        payload: ratings
       });
     };
   };
@@ -44,6 +53,27 @@ export namespace RatingActions {
 
       return dispatch({
         type: Type.GET_RATINGS_OF_TEAM_SUCCESS,
+        payload: ratings
+      });
+    };
+  };
+
+  export const getRatingsOfChallenge: ActionCreator<ThunkAction<Action, RootState.RatingState, void>> = (challengeId: string) => {
+    return (dispatch: Dispatch<RootState.RatingState>): Action => {
+
+      dispatch({
+        type: Type.GET_RATINGS_OF_CHALLENGE
+      });
+
+      const ratings = [{
+        id: "ra1",
+        scorePercentage: 10,
+        comment: "Not bad",
+        submissionId: "su1"
+      }]
+
+      return dispatch({
+        type: Type.GET_RATINGS_OF_CHALLENGE_SUCCESS,
         payload: ratings
       });
     };

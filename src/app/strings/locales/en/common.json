@@ -4,11 +4,15 @@
     "headerItemSignOut": "Sign out",
     "search": "Search",
     "searchNamePlaceholder": "Search name",
+    "searchTeamPlaceholder": "Search team",
+    "submission": "Submission",
     "reset": "Reset",
     "tableColumnName": "Name",
+    "tableColumnTeam": "Team",
     "tableColumnStatus": "Status",
     "tableColumnTimeline": "Timeline",
     "tableColumnScore": "Score",
     "tableColumnComment": "Comment",
-    "tableColumnShow": "Show"
+    "tableColumnShow": "Show",
+    "uploadSubmission": "Upload submission"
 }

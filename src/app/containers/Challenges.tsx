@@ -4,15 +4,14 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { ChallengeActions, RatingActions, SubmissionActions } from '../actions';
 import { RootState } from '../reducers';
-import { MainLayout, ChallengesTable } from '../components';
+import { MainLayout, ChallengesTable, StyledTitle } from '../components';
 import * as selectors from '../selectors';
-import styled from 'styled-components'
 import i18n from '../strings/i18n';
 import { omit } from '../utils';
 import { ChallengeModel } from '../models';
 
 interface Props extends RouteComponentProps<void> {
-    tableData: ChallengeModel.ChallengeTableData[];
+    tableData: ChallengeModel.ChallengesTableData[];
     state: RootState.ChallengeState;
     challengeActions: ChallengeActions;
     ratingActions: RatingActions;
@@ -27,24 +26,26 @@ export class Challenges extends React.Component<Props> {
 
     componentWillMount() {
         this.props.challengeActions.getChallenges()
-        this.props.ratingActions.getRatingsOfTeam("123t")
         this.props.submissionActions.getSubmissionsOfTeam("123t")
+        this.props.ratingActions.getRatingsOfTeam("123t")
     }
+
+    showChallengeDetails = (key: string) => { this.props.history.push('/challenges/' + key) }
 
     render() {
         return (
             <MainLayout location={location}>
-                <StyledContainer>
+                <div>
                     <StyledTitle>{i18n.t('glossary:challengesTitle')}</StyledTitle>
-                    <ChallengesTable data={this.props.tableData} />
-                </StyledContainer>
+                    <ChallengesTable showChallengeDetails={this.showChallengeDetails} data={this.props.tableData} />
+                </div>
             </MainLayout>
         );
     }
 }
 
 function mapStateToProps(state: RootState): Pick<Props, 'state' | 'tableData'> {
-    const tableData = selectors.getChallengeTableData(state);
+    const tableData = selectors.getChallengesTableData(state);
 
     return { state: state.challenges, tableData };
 }
@@ -57,12 +58,3 @@ function mapDispatchToProps(dispatch: Dispatch<RootState.ChallengeState>):
         submissionActions: bindActionCreators(omit(SubmissionActions, 'Type'), dispatch)
     };
 }
-
-const StyledContainer = styled.div`
-font-family: Georgia, sans-serif;
-`
-const StyledTitle = styled.h1`
-font-size: 2.5rem;
-font-weight: normal;
-letter-spacing: -1px;
-`

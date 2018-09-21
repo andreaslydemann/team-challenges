@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { MainLayout } from '../components';
+import { MainLayout, StyledTitle } from '../components';
 import styled from 'styled-components';
 import i18n from '../strings/i18n';
 import img from '../../assets/yay.jpg';
@@ -25,11 +25,6 @@ export function PageNotFound({
 const StyledContainer = styled.div`
 font-family: Georgia, sans-serif;
 text-align: center;
-`
-const StyledTitle = styled.h1`
-font-size: 2.5rem;
-font-weight: normal;
-letter-spacing: -1px;
 `
 const StyledImage = styled.div`
 height: 328px;

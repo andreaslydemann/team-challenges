@@ -1,3 +1,6 @@
 export * from './ChallengeModel';
-export * from './SubmissionModel';
 export * from './RatingModel';
+export * from './SubmissionModel';
+export * from './TeamModel';
+export * from './TeamRequestModel';
+export * from './UserModel';

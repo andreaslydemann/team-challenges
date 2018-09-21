@@ -1,4 +1,3 @@
-// import { createAction } from 'redux-actions';
 import { Action, ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from '../reducers/state';
@@ -8,8 +7,13 @@ export namespace SubmissionActions {
     export enum Type {
         GET_SUBMISSIONS = 'GET_SUBMISSIONS',
         GET_SUBMISSIONS_SUCCESS = 'GET_SUBMISSIONS_SUCCESS',
+        GET_SUBMISSIONS_FAIL = 'GET_SUBMISSIONS_FAIL',
         GET_SUBMISSIONS_OF_TEAM = 'GET_SUBMISSIONS_OF_TEAM',
         GET_SUBMISSIONS_OF_TEAM_SUCCESS = 'GET_SUBMISSIONS_OF_TEAM_SUCCESS',
+        GET_SUBMISSIONS_OF_TEAM_FAIL = 'GET_SUBMISSIONS_OF_TEAM_FAIL',
+        GET_SUBMISSIONS_OF_CHALLENGE = 'GET_SUBMISSIONS_OF_CHALLENGE',
+        GET_SUBMISSIONS_OF_CHALLENGE_SUCCESS = 'GET_SUBMISSIONS_OF_CHALLENGE_SUCCESS',
+        GET_SUBMISSIONS_OF_CHALLENGE_FAIL = 'GET_SUBMISSIONS_OF_CHALLENGE_FAIL',
     }
 
     export const getSubmissions: ActionCreator<ThunkAction<Action, RootState.SubmissionState, void>> = () => {
@@ -19,12 +23,17 @@ export namespace SubmissionActions {
                 type: Type.GET_SUBMISSIONS
             });
 
-            const name = "hello";
-
+            const submissions = [{
+                id: "su1",
+                status: SubmissionModel.Status.EVALUATED,
+                createdAt: new Date(),
+                challengeId: "ch1",
+                teamId: "team1"
+            }]
 
             return dispatch({
                 type: Type.GET_SUBMISSIONS_SUCCESS,
-                payload: { name }
+                payload: submissions
             });
         };
     };
@@ -46,6 +55,28 @@ export namespace SubmissionActions {
 
             return dispatch({
                 type: Type.GET_SUBMISSIONS_OF_TEAM_SUCCESS,
+                payload: submissions
+            });
+        };
+    };
+
+    export const getSubmissionsOfChallenge: ActionCreator<ThunkAction<Action, RootState.SubmissionState, void>> = (challengeId: string) => {
+        return (dispatch: Dispatch<RootState.SubmissionState>): Action => {
+
+            dispatch({
+                type: Type.GET_SUBMISSIONS_OF_CHALLENGE
+            });
+
+            const submissions = [{
+                id: "su1",
+                status: SubmissionModel.Status.EVALUATED,
+                createdAt: new Date(),
+                challengeId: "ch1",
+                teamId: "team1"
+            }]
+
+            return dispatch({
+                type: Type.GET_SUBMISSIONS_OF_CHALLENGE_SUCCESS,
                 payload: submissions
             });
         };

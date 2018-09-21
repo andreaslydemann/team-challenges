@@ -24,4 +24,14 @@ export const ratingReducer = handleActions<RootState.RatingState, RatingModel[]>
         (state: RootState.RatingState, action: Action<RatingModel[]>): RootState.RatingState => {
             return { ...state, ratings: action.payload, loading: false };
         },
+
+    [RatingActions.Type.GET_RATINGS_OF_CHALLENGE]:
+        (state: RootState.RatingState): RootState.RatingState => {
+            return { ...state, loading: true };
+        },
+
+    [RatingActions.Type.GET_RATINGS_OF_CHALLENGE_SUCCESS]:
+        (state: RootState.RatingState, action: Action<RatingModel[]>): RootState.RatingState => {
+            return { ...state, ratings: action.payload, loading: false };
+        },
 }, initialState);

@@ -7,6 +7,10 @@ export namespace ChallengeActions {
   export enum Type {
     GET_CHALLENGES = 'GET_CHALLENGES',
     GET_CHALLENGES_SUCCESS = 'GET_CHALLENGES_SUCCESS',
+    GET_CHALLENGES_FAIL = 'GET_CHALLENGES_FAIL',
+    GET_CHALLENGE = 'GET_CHALLENGE',
+    GET_CHALLENGE_SUCCESS = 'GET_CHALLENGE_SUCCESS',
+    GET_CHALLENGE_FAIL = 'GET_CHALLENGE_FAIL',
   }
 
   export const getChallenges: ActionCreator<ThunkAction<Action, RootState.ChallengeState, void>> = () => {
@@ -27,7 +31,7 @@ export namespace ChallengeActions {
         name: 'Challenge 2',
         description: 'This is a challenge',
         createdAt: new Date()
-      },{
+      }, {
         id: "ch3",
         name: 'Challenge 3',
         description: 'This is a challenge',
@@ -38,6 +42,39 @@ export namespace ChallengeActions {
         type: Type.GET_CHALLENGES_SUCCESS,
         payload: challenges
       });
+    };
+  };
+
+  export const getChallenge: ActionCreator<ThunkAction<Action, RootState.ChallengeState, void>> = (id: string) => {
+    return (dispatch: Dispatch<RootState.ChallengeState>): Action => {
+      try {
+        dispatch({
+          type: Type.GET_CHALLENGE
+        });
+
+        const challenge = [{
+          id: "ch1",
+          name: 'Challenge 1',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+          createdAt: new Date()
+        }];
+
+        const i = challenge.findIndex(x => x.id === id)
+
+        if (i === -1) {
+          throw (new Error("Challenge not found"))
+        }
+
+        return dispatch({
+          type: Type.GET_CHALLENGE_SUCCESS,
+          payload: challenge
+        });
+      } catch (err) {
+        return dispatch({
+          type: Type.GET_CHALLENGE_FAIL,
+          payload: err.message
+        });
+      }
     };
   };
 
