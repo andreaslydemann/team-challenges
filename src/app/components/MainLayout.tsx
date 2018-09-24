@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Layout, BackTop } from 'antd';
-import { Header } from './Header';
-import { Footer } from './Footer';
 import styled from 'styled-components'
+import { Layout, BackTop } from 'antd';
+import { Header, Footer } from './';
 
 interface Props {
     children: JSX.Element,

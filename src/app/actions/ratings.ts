@@ -1,4 +1,3 @@
-// import { createAction } from 'redux-actions';
 import { Action, ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from '../reducers/state';
@@ -35,7 +34,6 @@ export namespace RatingActions {
       });
     };
   };
-
   
   export const getRatingsByTeamId: ActionCreator<ThunkAction<Promise<Action>, RootState.RatingState, void>> = (teamId: string) => {
     return async (dispatch: Dispatch<RootState.RatingState>): Promise<Action> => {
@@ -90,7 +88,6 @@ export namespace RatingActions {
       };
     };
   };
-}
-
+};
 
 export type RatingActions = Omit<typeof RatingActions, 'Type'>;

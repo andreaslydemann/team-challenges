@@ -4,12 +4,12 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { ChallengeActions } from '../actions';
 import { RootState } from '../reducers';
-import { MainLayout, ChallengesTable, StyledTitle, StyledDescription } from '../components';
-import * as selectors from '../selectors';
-import { omit } from '../utils';
 import { ChallengeModel } from '../models';
+import * as selectors from '../selectors';
+import { Button, Skeleton } from 'antd';
+import { MainLayout, ChallengesTable, StyledTitle, StyledDescription } from '../components';
 import i18n from '../strings/i18n';
-import { Button } from 'antd';
+import { omit } from '../utils';
 
 interface MatchParams {
     id: string;
@@ -38,16 +38,20 @@ export class ChallengeDetails extends React.Component<Props> {
                     {this.props.state.error ? (
                         <StyledTitle>{i18n.t(this.props.state.error)}</StyledTitle>
                     ) : (
-                            <div>
-                                <StyledTitle>{this.props.state.challenges[0].name}</StyledTitle>
-                                <StyledDescription>{this.props.state.challenges[0].description}</StyledDescription>
-                                <ChallengesTable
-                                    isChallengeDetailsTable={true}
-                                    data={this.props.challengesTableData} />
-                                <Button
-                                    onClick={() => { this.props.history.push(this.props.location.pathname + '/submission') }}
-                                    style={ButtonStyle}>{i18n.t('common:submissionButton')}</Button>
-                            </div>
+                            this.props.state.loading ? (
+                                <Skeleton paragraph={{ rows: 8 }} active={true} />
+                            ) : (
+                                    <div>
+                                        <StyledTitle>{this.props.state.challenges[0].name}</StyledTitle>
+                                        <StyledDescription>{this.props.state.challenges[0].description}</StyledDescription>
+                                        <ChallengesTable
+                                            isChallengeDetailsTable={true}
+                                            data={this.props.challengesTableData} />
+                                        <Button
+                                            onClick={() => { this.props.history.push(this.props.location.pathname + '/submission') }}
+                                            style={ButtonStyle}>{i18n.t('common:submissionButton')}</Button>
+                                    </div>
+                                )
                         )}
                 </div>
             </MainLayout>

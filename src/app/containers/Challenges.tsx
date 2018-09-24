@@ -4,11 +4,12 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { ChallengeActions, RatingActions, SubmissionActions } from '../actions';
 import { RootState } from '../reducers';
-import { MainLayout, ChallengesTable, StyledTitle } from '../components';
+import { ChallengeModel } from '../models';
 import * as selectors from '../selectors';
+import { Skeleton } from 'antd';
+import { MainLayout, ChallengesTable, StyledTitle } from '../components';
 import i18n from '../strings/i18n';
 import { omit } from '../utils';
-import { ChallengeModel } from '../models';
 
 interface Props extends RouteComponentProps<void> {
     challengesTableData: ChallengeModel.ChallengesTableData[];
@@ -36,10 +37,14 @@ export class Challenges extends React.Component<Props> {
             <MainLayout location={location}>
                 <div>
                     <StyledTitle>{i18n.t('glossary:challengesTitle')}</StyledTitle>
-                    <ChallengesTable
-                        showChallengeDetails={this.showChallengeDetails}
-                        data={this.props.challengesTableData}
-                    />
+                    {this.props.state.loading ? (
+                        <Skeleton active={true} />
+                    ) : (
+                            <ChallengesTable
+                                showChallengeDetails={this.showChallengeDetails}
+                                data={this.props.challengesTableData}
+                            />
+                        )}
                 </div>
             </MainLayout>
         );

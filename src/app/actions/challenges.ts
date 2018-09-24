@@ -1,4 +1,3 @@
-// import { createAction } from 'redux-actions';
 import { Action, ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from '../reducers/state';
@@ -33,7 +32,7 @@ export namespace ChallengeActions {
       dispatch({
         type: Type.GET_CHALLENGES
       });
-      
+
       const challenges = [{
         id: "ch1",
         name: 'Challenge 1',
@@ -53,7 +52,7 @@ export namespace ChallengeActions {
       }];
 
       try {
-        // const { data } = await axios.get(`${BASE_URL}/todos/${ID}`);
+        //const { data } = await axios.get(`${BASE_URL}/todos/${ID}`);
 
         return dispatch({
           type: Type.GET_CHALLENGES_SUCCESS,
@@ -81,13 +80,7 @@ export namespace ChallengeActions {
         createdAt: new Date()
       }];
 
-      //const BASE_URL = "https://jsonplaceholder.typicode.com";
-      //const ID = 1
-
       try {
-        //const { data } = await axios.get(`${BASE_URL}/todos/${ID}`);
-        //console.log(data);
-
         return dispatch({
           type: Type.GET_CHALLENGE_SUCCESS,
           payload: challenge
@@ -100,6 +93,6 @@ export namespace ChallengeActions {
       };
     };
   };
-}
+};
 
 export type ChallengeActions = Omit<typeof ChallengeActions, 'Type'>;

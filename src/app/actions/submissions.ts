@@ -1,7 +1,7 @@
 import { Action, ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from '../reducers/state';
-import { SubmissionModel } from '../models/SubmissionModel';
+import { SubmissionModel } from '../models';
 
 export namespace SubmissionActions {
     export enum Type {
@@ -37,7 +37,6 @@ export namespace SubmissionActions {
         };
     };
 
-    
     export const getSubmissionsByTeamId: ActionCreator<ThunkAction<Promise<Action>, RootState.SubmissionState, void>> = (teamId: string) => {
         return async (dispatch: Dispatch<RootState.SubmissionState>): Promise<Action> => {
             dispatch({
@@ -53,10 +52,10 @@ export namespace SubmissionActions {
             }];
 
             try {
-            return dispatch({
-                type: Type.GET_SUBMISSIONS_OF_TEAM_SUCCESS,
-                payload: submissions
-            });
+                return dispatch({
+                    type: Type.GET_SUBMISSIONS_OF_TEAM_SUCCESS,
+                    payload: submissions
+                });
             } catch (err) {
                 return dispatch({
                     type: Type.GET_SUBMISSIONS_OF_TEAM_FAIL,
@@ -80,12 +79,7 @@ export namespace SubmissionActions {
                 teamId: "team1"
             }]
 
-            //const BASE_URL = "https://jsonplaceholder.typicode.com";
-            //const ID = 1
-
             try {
-                //const { data } = await axios.get(`${BASE_URL}/todos/${ID}`);
-
                 return dispatch({
                     type: Type.GET_SUBMISSIONS_OF_CHALLENGE_SUCCESS,
                     payload: submissions
@@ -98,6 +92,6 @@ export namespace SubmissionActions {
             };
         };
     };
-}
+};
 
 export type SubmissionActions = Omit<typeof SubmissionActions, 'Type'>;

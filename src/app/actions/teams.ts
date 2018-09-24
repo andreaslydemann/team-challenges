@@ -59,6 +59,6 @@ export namespace TeamActions {
             };
         };
     };
-}
+};
 
 export type TeamActions = Omit<typeof TeamActions, 'Type'>;
