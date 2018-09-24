@@ -9,7 +9,7 @@ const initialState: RootState.ChallengeState =
     id: '',
     name: '',
     description: '',
-    createdAt: new Date()
+    createdAt: null
   }],
   loading: false,
   error: ''

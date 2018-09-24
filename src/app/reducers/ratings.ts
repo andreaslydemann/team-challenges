@@ -6,10 +6,10 @@ import { RatingActions } from '../actions';
 const initialState: RootState.RatingState =
 {
     ratings: [{
-        id: "123",
-        scorePercentage: 50,
-        comment: "Not bad",
-        submissionId: "123k",
+        id: '',
+        scorePercentage: 0,
+        comment: '',
+        submissionId: '',
     }],
     loading: false
 };

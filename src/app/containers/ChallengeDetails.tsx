@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router-dom';
-import { ChallengeActions, RatingActions, SubmissionActions, TeamActions } from '../actions';
+import { ChallengeActions } from '../actions';
 import { RootState } from '../reducers';
 import { MainLayout, ChallengesTable, StyledTitle, StyledDescription } from '../components';
 import * as selectors from '../selectors';
@@ -16,28 +16,19 @@ interface MatchParams {
 }
 
 interface Props extends RouteComponentProps<MatchParams> {
-    tableData: ChallengeModel.ChallengeDetailsTableData[];
+    challengesTableData: ChallengeModel.ChallengeDetailsTableData[];
     state: RootState.ChallengeState;
     challengeActions: ChallengeActions;
-    ratingActions: RatingActions;
-    submissionActions: SubmissionActions;
-    teamActions: TeamActions;
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
 export class ChallengeDetails extends React.Component<Props> {
-
     constructor(props: Props, context?: any) {
         super(props, context);
     }
 
-    componentWillMount() {
-        const { id } = this.props.match.params;
-
-        this.props.challengeActions.getChallenge(id);
-        this.props.submissionActions.getSubmissionsOfChallenge(id);
-        this.props.ratingActions.getRatingsOfChallenge(id);
-        this.props.teamActions.getTeamsOfChallenge(id);
+    componentDidMount() {
+        this.props.challengeActions.initChallengeDetails(this.props.match.params.id);
     }
 
     render() {
@@ -50,7 +41,9 @@ export class ChallengeDetails extends React.Component<Props> {
                             <div>
                                 <StyledTitle>{this.props.state.challenges[0].name}</StyledTitle>
                                 <StyledDescription>{this.props.state.challenges[0].description}</StyledDescription>
-                                <ChallengesTable isChallengeDetailsTable={true} data={this.props.tableData} />
+                                <ChallengesTable
+                                    isChallengeDetailsTable={true}
+                                    data={this.props.challengesTableData} />
                                 <Button
                                     onClick={() => { this.props.history.push(this.props.location.pathname + '/submission') }}
                                     style={ButtonStyle}>{i18n.t('common:submissionButton')}</Button>
@@ -62,20 +55,12 @@ export class ChallengeDetails extends React.Component<Props> {
     }
 }
 
-function mapStateToProps(state: RootState): Pick<Props, 'state' | 'tableData'> {
-    const tableData = selectors.getChallengeDetailsTableData(state);
-
-    return { state: state.challenges, tableData };
+function mapStateToProps(state: RootState): Pick<Props, 'state' | 'challengesTableData'> {
+    return { state: state.challenges, challengesTableData: selectors.getChallengeDetailsTableData(state) };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<RootState.ChallengeState>):
-    Pick<Props, 'challengeActions' | 'ratingActions' | 'submissionActions' | 'teamActions'> {
-    return {
-        challengeActions: bindActionCreators(omit(ChallengeActions, 'Type'), dispatch),
-        ratingActions: bindActionCreators(omit(RatingActions, 'Type'), dispatch),
-        submissionActions: bindActionCreators(omit(SubmissionActions, 'Type'), dispatch),
-        teamActions: bindActionCreators(omit(TeamActions, 'Type'), dispatch)
-    };
+function mapDispatchToProps(dispatch: Dispatch<RootState.ChallengeState>): Pick<Props, 'challengeActions'> {
+    return { challengeActions: bindActionCreators(omit(ChallengeActions, 'Type'), dispatch) };
 }
 
 const ButtonStyle: React.CSSProperties = {

@@ -6,11 +6,11 @@ import { SubmissionActions } from '../actions';
 const initialState: RootState.SubmissionState =
 {
     submissions: [{
-        id: "h23",
-        status: SubmissionModel.Status.EVALUATED,
-        createdAt: new Date(),
-        challengeId: "123t",
-        teamId: "125d"
+        id: '',
+        status: SubmissionModel.Status.NOT_SUBMITTED,
+        createdAt: null,
+        challengeId: '',
+        teamId: ''
     }],
     loading: false
 };

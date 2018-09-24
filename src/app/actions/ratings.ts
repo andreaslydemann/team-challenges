@@ -9,16 +9,15 @@ export namespace RatingActions {
     GET_RATINGS_SUCCESS = 'GET_RATINGS_SUCCESS',
     GET_RATINGS_FAIL = 'GET_RATINGS_FAIL',
     GET_RATINGS_OF_TEAM = 'GET_RATINGS_OF_TEAM',
-    GET_RATINGS_OF_TEAM_SUCCESS = 'GET_RATINGS_OF_TEAM_SUCCESS',    
+    GET_RATINGS_OF_TEAM_SUCCESS = 'GET_RATINGS_OF_TEAM_SUCCESS',
     GET_RATINGS_OF_TEAM_FAIL = 'GET_RATINGS_OF_TEAM_FAIL',
     GET_RATINGS_OF_CHALLENGE = 'GET_RATINGS_OF_CHALLENGE',
-    GET_RATINGS_OF_CHALLENGE_SUCCESS = 'GET_RATINGS_OF_CHALLENGE_SUCCESS',    
+    GET_RATINGS_OF_CHALLENGE_SUCCESS = 'GET_RATINGS_OF_CHALLENGE_SUCCESS',
     GET_RATINGS_OF_CHALLENGE_FAIL = 'GET_RATINGS_OF_CHALLENGE_FAIL',
   }
 
   export const getRatings: ActionCreator<ThunkAction<Action, RootState.RatingState, void>> = () => {
     return (dispatch: Dispatch<RootState.RatingState>): Action => {
-
       dispatch({
         type: Type.GET_RATINGS
       });
@@ -37,9 +36,9 @@ export namespace RatingActions {
     };
   };
 
-  export const getRatingsOfTeam: ActionCreator<ThunkAction<Action, RootState.RatingState, void>> = (teamId: string) => {
-    return (dispatch: Dispatch<RootState.RatingState>): Action => {
-
+  
+  export const getRatingsByTeamId: ActionCreator<ThunkAction<Promise<Action>, RootState.RatingState, void>> = (teamId: string) => {
+    return async (dispatch: Dispatch<RootState.RatingState>): Promise<Action> => {
       dispatch({
         type: Type.GET_RATINGS_OF_TEAM
       });
@@ -49,18 +48,24 @@ export namespace RatingActions {
         scorePercentage: 10,
         comment: "Not bad",
         submissionId: "su1"
-      }]
+      }];
 
-      return dispatch({
-        type: Type.GET_RATINGS_OF_TEAM_SUCCESS,
-        payload: ratings
-      });
+      try {
+        return dispatch({
+          type: Type.GET_RATINGS_OF_TEAM_SUCCESS,
+          payload: ratings
+        });
+      } catch (err) {
+        return dispatch({
+          type: Type.GET_RATINGS_OF_TEAM_FAIL,
+          payload: 'validation:challengeNotFound'
+        });
+      };
     };
   };
 
-  export const getRatingsOfChallenge: ActionCreator<ThunkAction<Action, RootState.RatingState, void>> = (challengeId: string) => {
-    return (dispatch: Dispatch<RootState.RatingState>): Action => {
-
+  export const getRatingsByChallengeId: ActionCreator<ThunkAction<Promise<Action>, RootState.RatingState, void>> = (challengeId: string) => {
+    return async (dispatch: Dispatch<RootState.RatingState>): Promise<Action> => {
       dispatch({
         type: Type.GET_RATINGS_OF_CHALLENGE
       });
@@ -70,12 +75,19 @@ export namespace RatingActions {
         scorePercentage: 10,
         comment: "Not bad",
         submissionId: "su1"
-      }]
+      }];
 
-      return dispatch({
-        type: Type.GET_RATINGS_OF_CHALLENGE_SUCCESS,
-        payload: ratings
-      });
+      try {
+        return dispatch({
+          type: Type.GET_RATINGS_OF_CHALLENGE_SUCCESS,
+          payload: ratings
+        });
+      } catch (err) {
+        return dispatch({
+          type: Type.GET_RATINGS_OF_CHALLENGE_FAIL,
+          payload: 'validation:challengeNotFound'
+        });
+      };
     };
   };
 }

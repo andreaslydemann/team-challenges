@@ -18,7 +18,6 @@ export namespace SubmissionActions {
 
     export const getSubmissions: ActionCreator<ThunkAction<Action, RootState.SubmissionState, void>> = () => {
         return (dispatch: Dispatch<RootState.SubmissionState>): Action => {
-
             dispatch({
                 type: Type.GET_SUBMISSIONS
             });
@@ -38,9 +37,9 @@ export namespace SubmissionActions {
         };
     };
 
-    export const getSubmissionsOfTeam: ActionCreator<ThunkAction<Action, RootState.SubmissionState, void>> = (teamId: string) => {
-        return (dispatch: Dispatch<RootState.SubmissionState>): Action => {
-
+    
+    export const getSubmissionsByTeamId: ActionCreator<ThunkAction<Promise<Action>, RootState.SubmissionState, void>> = (teamId: string) => {
+        return async (dispatch: Dispatch<RootState.SubmissionState>): Promise<Action> => {
             dispatch({
                 type: Type.GET_SUBMISSIONS_OF_TEAM
             });
@@ -51,18 +50,24 @@ export namespace SubmissionActions {
                 createdAt: new Date(),
                 challengeId: "ch1",
                 teamId: "team1"
-            }]
+            }];
 
+            try {
             return dispatch({
                 type: Type.GET_SUBMISSIONS_OF_TEAM_SUCCESS,
                 payload: submissions
             });
+            } catch (err) {
+                return dispatch({
+                    type: Type.GET_SUBMISSIONS_OF_TEAM_FAIL,
+                    payload: 'validation:challengeNotFound'
+                });
+            };
         };
     };
 
-    export const getSubmissionsOfChallenge: ActionCreator<ThunkAction<Action, RootState.SubmissionState, void>> = (challengeId: string) => {
-        return (dispatch: Dispatch<RootState.SubmissionState>): Action => {
-
+    export const getSubmissionsByChallengeId: ActionCreator<ThunkAction<Promise<Action>, RootState.SubmissionState, void>> = (challengeId: string) => {
+        return async (dispatch: Dispatch<RootState.SubmissionState>): Promise<Action> => {
             dispatch({
                 type: Type.GET_SUBMISSIONS_OF_CHALLENGE
             });
@@ -75,10 +80,22 @@ export namespace SubmissionActions {
                 teamId: "team1"
             }]
 
-            return dispatch({
-                type: Type.GET_SUBMISSIONS_OF_CHALLENGE_SUCCESS,
-                payload: submissions
-            });
+            //const BASE_URL = "https://jsonplaceholder.typicode.com";
+            //const ID = 1
+
+            try {
+                //const { data } = await axios.get(`${BASE_URL}/todos/${ID}`);
+
+                return dispatch({
+                    type: Type.GET_SUBMISSIONS_OF_CHALLENGE_SUCCESS,
+                    payload: submissions
+                });
+            } catch (err) {
+                return dispatch({
+                    type: Type.GET_SUBMISSIONS_OF_CHALLENGE_FAIL,
+                    payload: 'validation:challengeNotFound'
+                });
+            };
         };
     };
 }

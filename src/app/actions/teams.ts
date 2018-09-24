@@ -31,9 +31,8 @@ export namespace TeamActions {
         };
     };
 
-    export const getTeamsOfChallenge: ActionCreator<ThunkAction<Action, RootState.TeamState, void>> = (challengeId: string) => {
-        return (dispatch: Dispatch<RootState.TeamState>): Action => {
-
+    export const getTeamsByChallengeId: ActionCreator<ThunkAction<Promise<Action>, RootState.TeamState, void>> = (challengeId: string) => {
+        return async (dispatch: Dispatch<RootState.TeamState>): Promise<Action> => {
             dispatch({
                 type: Type.GET_TEAMS_OF_CHALLENGE
             });
@@ -45,12 +44,19 @@ export namespace TeamActions {
             {
                 id: "team2",
                 name: "Team Roadster",
-            }]
+            }];
 
-            return dispatch({
-                type: Type.GET_TEAMS_OF_CHALLENGE_SUCCESS,
-                payload: teams
-            });
+            try {
+                return dispatch({
+                    type: Type.GET_TEAMS_OF_CHALLENGE_SUCCESS,
+                    payload: teams
+                });
+            } catch (err) {
+                return dispatch({
+                    type: Type.GET_TEAMS_OF_CHALLENGE_FAIL,
+                    payload: 'validation:challengeNotFound'
+                });
+            };
         };
     };
 }

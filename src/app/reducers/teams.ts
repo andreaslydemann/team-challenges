@@ -6,8 +6,8 @@ import { TeamActions } from '../actions';
 const initialState: RootState.TeamState =
 {
     teams: [{
-        id: "team1",
-        name: "Team Falcon",
+        id: '',
+        name: '',
     }],
     loading: false
 };

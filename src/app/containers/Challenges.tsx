@@ -11,7 +11,7 @@ import { omit } from '../utils';
 import { ChallengeModel } from '../models';
 
 interface Props extends RouteComponentProps<void> {
-    tableData: ChallengeModel.ChallengesTableData[];
+    challengesTableData: ChallengeModel.ChallengesTableData[];
     state: RootState.ChallengeState;
     challengeActions: ChallengeActions;
     ratingActions: RatingActions;
@@ -24,10 +24,9 @@ export class Challenges extends React.Component<Props> {
         super(props, context);
     }
 
-    componentWillMount() {
-        this.props.challengeActions.getChallenges()
-        this.props.submissionActions.getSubmissionsOfTeam("123t")
-        this.props.ratingActions.getRatingsOfTeam("123t")
+    componentDidMount() {
+        const teamId = "123t";
+        this.props.challengeActions.initChallenges(teamId);
     }
 
     showChallengeDetails = (key: string) => { this.props.history.push('/challenges/' + key) }
@@ -37,24 +36,20 @@ export class Challenges extends React.Component<Props> {
             <MainLayout location={location}>
                 <div>
                     <StyledTitle>{i18n.t('glossary:challengesTitle')}</StyledTitle>
-                    <ChallengesTable showChallengeDetails={this.showChallengeDetails} data={this.props.tableData} />
+                    <ChallengesTable
+                        showChallengeDetails={this.showChallengeDetails}
+                        data={this.props.challengesTableData}
+                    />
                 </div>
             </MainLayout>
         );
     }
 }
 
-function mapStateToProps(state: RootState): Pick<Props, 'state' | 'tableData'> {
-    const tableData = selectors.getChallengesTableData(state);
-
-    return { state: state.challenges, tableData };
+function mapStateToProps(state: RootState): Pick<Props, 'state' | 'challengesTableData'> {
+    return { state: state.challenges, challengesTableData: selectors.getChallengesTableData(state) };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<RootState.ChallengeState>):
-    Pick<Props, 'challengeActions' | 'ratingActions' | 'submissionActions'> {
-    return {
-        challengeActions: bindActionCreators(omit(ChallengeActions, 'Type'), dispatch),
-        ratingActions: bindActionCreators(omit(RatingActions, 'Type'), dispatch),
-        submissionActions: bindActionCreators(omit(SubmissionActions, 'Type'), dispatch)
-    };
+function mapDispatchToProps(dispatch: Dispatch<RootState.ChallengeState>): Pick<Props, 'challengeActions'> {
+    return { challengeActions: bindActionCreators(omit(ChallengeActions, 'Type'), dispatch) };
 }
