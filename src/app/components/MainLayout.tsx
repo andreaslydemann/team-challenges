@@ -33,7 +33,7 @@ const StyledLayout = styled(Layout)`
 height: 100vh;
 `
 const StyledLayoutContent = styled(Layout.Content)`
-padding: 0 50px;
+padding: 0 50px 15px 50px;
 background: #fff;
 `
 const StyledContainer = styled.div`

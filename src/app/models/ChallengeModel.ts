@@ -1,4 +1,4 @@
-import {SubmissionModel} from './SubmissionModel'
+import { SubmissionModel } from './SubmissionModel';
 
 export interface ChallengeModel {
     id: string;
@@ -8,6 +8,9 @@ export interface ChallengeModel {
 }
 
 export namespace ChallengeModel {
+    export interface ChallengeDetailsModel extends ChallengeModel {
+        file: object
+    }
     export interface ChallengesTableData {
         key: string;
         name: string;

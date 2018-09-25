@@ -12,7 +12,8 @@ const initialState: RootState.SubmissionState =
         challengeId: '',
         teamId: ''
     }],
-    loading: false
+    loading: false,
+    uploading: false
 };
 
 export const submissionReducer = handleActions<RootState.SubmissionState, SubmissionModel[]>({

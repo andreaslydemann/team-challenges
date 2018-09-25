@@ -17,6 +17,7 @@ export interface RootState {
 export namespace RootState {
   export type ChallengeState = {
     challenges: ChallengeModel[],
+    challengeDetails: ChallengeModel.ChallengeDetailsModel,
     loading: boolean,
     error: string
   };
@@ -26,7 +27,8 @@ export namespace RootState {
   };
   export type SubmissionState = {
     submissions: SubmissionModel[],
-    loading: boolean
+    loading: boolean,
+    uploading: boolean
   };
   export type TeamState = {
     teams: TeamModel[],

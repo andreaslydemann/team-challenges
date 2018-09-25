@@ -46,8 +46,8 @@ export class ChallengeDetails extends React.Component<Props> {
                             <StyledTitle>{i18n.t(this.props.state.error)}</StyledTitle>
                         ) : (
                                 <div>
-                                    <StyledTitle>{this.props.state.challenges[0].name}</StyledTitle>
-                                    <StyledDescription>{this.props.state.challenges[0].description}</StyledDescription>
+                                    <StyledTitle>{this.props.state.challengeDetails.name}</StyledTitle>
+                                    <StyledDescription>{this.props.state.challengeDetails.description}</StyledDescription>
                                     <ChallengesTable
                                         isChallengeDetailsTable={true}
                                         data={this.props.challengesTableData} />
@@ -72,6 +72,5 @@ function mapDispatchToProps(dispatch: Dispatch<RootState.ChallengeState>): Pick<
 
 const ButtonStyle: React.CSSProperties = {
     float: "right",
-    width: "112px",
-    marginBottom: "15px"
+    width: "112px"
 };

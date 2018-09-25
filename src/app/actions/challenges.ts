@@ -1,8 +1,9 @@
-//import { createAction } from 'redux-actions';
 import { Action, ActionCreator, Dispatch } from 'redux';
+import { createAction } from 'redux-actions';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from '../reducers/state';
-import { SubmissionActions, RatingActions, TeamActions } from './'
+import { SubmissionActions, RatingActions, TeamActions } from './';
+import { ChallengeModel } from '../models';
 //import axios from 'axios';
 
 export namespace ChallengeActions {
@@ -13,6 +14,8 @@ export namespace ChallengeActions {
     GET_CHALLENGE = 'GET_CHALLENGE',
     GET_CHALLENGE_SUCCESS = 'GET_CHALLENGE_SUCCESS',
     GET_CHALLENGE_FAIL = 'GET_CHALLENGE_FAIL',
+    SELECT_FILE = 'SELECT_FILE',
+    REMOVE_FILE = 'REMOVE_FILE'
   }
 
   export const initChallenges = (teamId: string) => (dispatch: Dispatch<any>) => {
@@ -74,7 +77,7 @@ export namespace ChallengeActions {
         type: Type.GET_CHALLENGE
       });
 
-      const challenge = [{
+      const challenge = {
         id: "ch1",
         name: 'Challenge 1',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
@@ -83,7 +86,7 @@ export namespace ChallengeActions {
           'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ' +
           'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         createdAt: new Date()
-      }];
+      };
 
       try {
         return dispatch({
@@ -99,9 +102,9 @@ export namespace ChallengeActions {
     };
   };
 
-  // export const addTodo = createAction<PartialPick<TodoModel, 'text'>>(Type.ADD_TODO);
+  export const selectFile = createAction<PartialPick<ChallengeModel.ChallengeDetailsModel, 'file'>>(Type.SELECT_FILE);
+  export const removeFile = createAction(Type.REMOVE_FILE);
   // export const deleteTodo = createAction<TodoModel['id']>(Type.DELETE_TODO);
-  // export const clearCompleted = createAction(Type.CLEAR_COMPLETED);
 };
 
 export type ChallengeActions = Omit<typeof ChallengeActions, 'Type'>;
