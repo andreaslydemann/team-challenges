@@ -56,7 +56,7 @@ export namespace RatingActions {
       } catch (err) {
         return dispatch({
           type: Type.GET_RATINGS_OF_TEAM_FAIL,
-          payload: 'validation:challengeNotFound'
+          payload: 'validation:genericErrorMessage'
         });
       };
     };
@@ -83,7 +83,7 @@ export namespace RatingActions {
       } catch (err) {
         return dispatch({
           type: Type.GET_RATINGS_OF_CHALLENGE_FAIL,
-          payload: 'validation:challengeNotFound'
+          payload: 'validation:genericErrorMessage'
         });
       };
     };

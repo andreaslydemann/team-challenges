@@ -1,8 +1,12 @@
 import * as React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import { Challenges, ChallengeDetails, Submission } from './containers';
 import { hot } from 'react-hot-loader';
-import { PageNotFound } from './containers/PageNotFound'
+import {
+  Challenges,
+  ChallengeDetails,
+  Submission,
+  PageNotFound
+} from './containers';
 
 export const App = hot(module)(() => (
   <Switch>

@@ -1,3 +1,4 @@
+//import { createAction } from 'redux-actions';
 import { Action, ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from '../reducers/state';
@@ -61,7 +62,7 @@ export namespace ChallengeActions {
       } catch (err) {
         return dispatch({
           type: Type.GET_CHALLENGES_FAIL,
-          payload: 'validation:challengeNotFound'
+          payload: 'validation:genericErrorMessage'
         });
       };
     };
@@ -76,7 +77,11 @@ export namespace ChallengeActions {
       const challenge = [{
         id: "ch1",
         name: 'Challenge 1',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, ' +
+          'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, ' +
+          'quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ' +
+          'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ' +
+          'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         createdAt: new Date()
       }];
 
@@ -93,6 +98,10 @@ export namespace ChallengeActions {
       };
     };
   };
+
+  // export const addTodo = createAction<PartialPick<TodoModel, 'text'>>(Type.ADD_TODO);
+  // export const deleteTodo = createAction<TodoModel['id']>(Type.DELETE_TODO);
+  // export const clearCompleted = createAction(Type.CLEAR_COMPLETED);
 };
 
 export type ChallengeActions = Omit<typeof ChallengeActions, 'Type'>;

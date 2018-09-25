@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router-dom';
-import { ChallengeActions, RatingActions, SubmissionActions } from '../actions';
+import { ChallengeActions } from '../actions';
 import { RootState } from '../reducers';
 import { ChallengeModel } from '../models';
 import * as selectors from '../selectors';
@@ -15,8 +15,6 @@ interface Props extends RouteComponentProps<void> {
     challengesTableData: ChallengeModel.ChallengesTableData[];
     state: RootState.ChallengeState;
     challengeActions: ChallengeActions;
-    ratingActions: RatingActions;
-    submissionActions: SubmissionActions;
 }
 
 @connect(mapStateToProps, mapDispatchToProps)

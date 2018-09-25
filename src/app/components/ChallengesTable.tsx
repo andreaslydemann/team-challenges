@@ -19,10 +19,7 @@ export class ChallengesTable extends React.Component<Props, State> {
     }
 
     render() {
-        this.state = {
-            searchText: '',
-        };
-
+        this.state = { searchText: '' };
         let searchInput: any;
 
         const handleSearch = (selectedKeys: number[], confirm: () => void) => () => {
@@ -44,7 +41,8 @@ export class ChallengesTable extends React.Component<Props, State> {
                     <StyledContainer>
                         <Input
                             ref={ele => searchInput = ele}
-                            placeholder={this.props.isChallengeDetailsTable ? i18n.t('common:searchTeamPlaceholder') : i18n.t('common:searchNamePlaceholder')}
+                            placeholder={this.props.isChallengeDetailsTable ?
+                                i18n.t('common:searchTeamPlaceholder') : i18n.t('common:searchNamePlaceholder')}
                             value={selectedKeys[0]}
                             onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
                             onPressEnter={handleSearch(selectedKeys, confirm)}
@@ -67,7 +65,8 @@ export class ChallengesTable extends React.Component<Props, State> {
                 ),
             filterIcon: (filtered: boolean) => <Icon type="search" style={{ color: filtered ? '#108ee9' : '#aaa' }} />,
             onFilter: (value: string, record: any) => this.props.isChallengeDetailsTable ?
-                record.team.toLowerCase().includes(value.toLowerCase()) : record.name.toLowerCase().includes(value.toLowerCase()),
+                record.team.toLowerCase().includes(value.toLowerCase())
+                : record.name.toLowerCase().includes(value.toLowerCase()),
             onFilterDropdownVisibleChange: (visible: boolean) => {
                 if (visible) {
                     setTimeout(() => {
@@ -118,7 +117,9 @@ export class ChallengesTable extends React.Component<Props, State> {
             key: 'action',
             dataIndex: '',
             render: (text: string, record: any) => (
-                <Button onClick={() => this.props.showChallengeDetails(record.key)}>{i18n.t('common:tableColumnShow')}</Button>                
+                <Button onClick={() => this.props.showChallengeDetails(record.key)}>
+                    {i18n.t('common:tableColumnShow')}
+                </Button>
             ),
         }];
 

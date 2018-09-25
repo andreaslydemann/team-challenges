@@ -59,7 +59,7 @@ export namespace SubmissionActions {
             } catch (err) {
                 return dispatch({
                     type: Type.GET_SUBMISSIONS_OF_TEAM_FAIL,
-                    payload: 'validation:challengeNotFound'
+                    payload: 'validation:genericErrorMessage'
                 });
             };
         };
@@ -87,7 +87,7 @@ export namespace SubmissionActions {
             } catch (err) {
                 return dispatch({
                     type: Type.GET_SUBMISSIONS_OF_CHALLENGE_FAIL,
-                    payload: 'validation:challengeNotFound'
+                    payload: 'validation:genericErrorMessage'
                 });
             };
         };

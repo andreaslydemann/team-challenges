@@ -54,7 +54,7 @@ export namespace TeamActions {
             } catch (err) {
                 return dispatch({
                     type: Type.GET_TEAMS_OF_CHALLENGE_FAIL,
-                    payload: 'validation:challengeNotFound'
+                    payload: 'validation:genericErrorMessage'
                 });
             };
         };
