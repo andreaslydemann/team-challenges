@@ -13,10 +13,11 @@ const initialState: RootState.SubmissionState =
         teamId: ''
     }],
     loading: false,
-    uploading: false
+    uploading: false,
+    error: ''
 };
 
-export const submissionReducer = handleActions<RootState.SubmissionState, SubmissionModel[]>({
+export const submissionReducer = handleActions<RootState.SubmissionState, any>({
     [SubmissionActions.Type.GET_SUBMISSIONS_OF_TEAM]:
         (state: RootState.SubmissionState): RootState.SubmissionState => {
             return { ...state, loading: true };
@@ -35,5 +36,16 @@ export const submissionReducer = handleActions<RootState.SubmissionState, Submis
     [SubmissionActions.Type.GET_SUBMISSIONS_OF_CHALLENGE_SUCCESS]:
         (state: RootState.SubmissionState, action: Action<SubmissionModel[]>): RootState.SubmissionState => {
             return { ...state, submissions: action.payload, loading: false };
+        },
+
+    [SubmissionActions.Type.SUBMIT_FILE]:
+        (state: RootState.SubmissionState): RootState.SubmissionState => ({ ...state, uploading: true, error: '' }),
+
+    [SubmissionActions.Type.SUBMIT_FILE_SUCCESS]:
+        (state: RootState.SubmissionState): RootState.SubmissionState => ({ ...state, uploading: false }),
+
+    [SubmissionActions.Type.GET_SUBMISSIONS_OF_CHALLENGE_SUCCESS]:
+        (state: RootState.SubmissionState, action: Action<string>): RootState.SubmissionState => {
+            return { ...state, uploading: false, error: action.payload };
         },
 }, initialState);

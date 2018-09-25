@@ -28,7 +28,8 @@ export namespace RootState {
   export type SubmissionState = {
     submissions: SubmissionModel[],
     loading: boolean,
-    uploading: boolean
+    uploading: boolean,
+    error: string
   };
   export type TeamState = {
     teams: TeamModel[],

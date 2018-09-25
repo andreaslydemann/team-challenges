@@ -15,5 +15,6 @@
     "tableColumnTeam": "Team",
     "tableColumnTimeline": "Timeline",
     "tableColumnTimelineCompleted": "Completed",
-    "uploadSubmissionButton": "Upload submission"
+    "startUploadSubmissionButton": "Upload submission",
+    "uploadingSubmissionButton": "Uploading"
 }

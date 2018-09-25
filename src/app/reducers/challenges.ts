@@ -47,11 +47,15 @@ export const challengeReducer = handleActions<RootState.ChallengeState, any>({
     (state: RootState.ChallengeState, action: Action<string>): RootState.ChallengeState => {
       return { ...state, error: action.payload, loading: false };
     },
-  [ChallengeActions.Type.SELECT_FILE]: (state, action) => {
+
+  [ChallengeActions.Type.SELECT_FILE]: (state: RootState.ChallengeState, action: any): RootState.ChallengeState => {
     if (action.payload)
       return { ...state, challengeDetails: { ...state.challengeDetails, file: action.payload } };
     else
       return state;
   },
-  [ChallengeActions.Type.REMOVE_FILE]: (state) => ({ ...state, challengeDetails: { ...state.challengeDetails, file: null } }),
+
+  [ChallengeActions.Type.REMOVE_FILE]: (state: RootState.ChallengeState): RootState.ChallengeState => {
+    return { ...state, challengeDetails: { ...state.challengeDetails, file: null } }
+  },
 }, initialState);

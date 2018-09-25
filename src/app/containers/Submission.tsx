@@ -4,7 +4,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { ChallengeActions, SubmissionActions } from '../actions';
 import { RootState } from '../reducers';
-import { Upload, Button, message, Icon } from 'antd';
+import { Upload, Button, Icon } from 'antd';
 import { MainLayout, StyledTitle, StyledDescription } from '../components';
 import { omit } from '../utils';
 import i18n from '../strings/i18n';
@@ -32,23 +32,23 @@ export class Submission extends React.Component<Props> {
     }
 
     handleUpload = () => {
-        // const { file } = this.props.state.challengeDetails;
-        // const formData = new FormData();
-        // formData.append('file', file);
-        // formData is data for post request
+        const file = this.props.challengeState.challengeDetails.file;
+        const formData = new FormData();
 
-        // call upload action (submissionActions) (param: file)
-        // - should dispatch {type: upload_file, payload: true (uploading)
+        formData.append('file', JSON.stringify(file));
 
-        // upload file (axios)
-        // - should dispatch either UPLOAD_FILE_SUCCESS (payload: false) or UPLOAD_FILE_FAIL (payload: false)
-
-        // this.props.history.replace("/challenges/" + this.props.match.params.id)
+        this.props.submissionActions.submitFile(formData, () => {
+            this.props.history.replace("/challenges/" + this.props.match.params.id)
+        });
     }
 
     render() {
         const { name, description, file } = this.props.challengeState.challengeDetails;
-        const { uploading } = this.props.submissionState;
+        const { uploading, error } = this.props.submissionState;
+
+        console.log(error)
+        //if (error !== '')
+        //  message.error(i18n.t(error));
 
         const uploadConfig = {
             action: '',
@@ -56,14 +56,6 @@ export class Submission extends React.Component<Props> {
             beforeUpload: (beforeUploadFile: any) => {
                 this.props.challengeActions.selectFile(beforeUploadFile);
                 return false;
-            },
-            onChange(info: any) {
-                const { status } = info.file;
-
-                if (status === 'done')
-                    message.success(`${info.file.name} ${i18n.t('validation:submissionUploadSuccess')}`);
-                else if (status === 'error')
-                    message.error(`${info.file.name} ${i18n.t('validation:submissionUploadFail')}`);
             },
             onRemove: () => { this.props.challengeActions.removeFile() },
             fileList: file ? [file] as ChallengeModel.ChallengeDetailsModel[] : [] as any[]
@@ -87,7 +79,10 @@ export class Submission extends React.Component<Props> {
                                     loading={uploading}
                                     disabled={!file}
                                     onClick={this.handleUpload}
-                                    style={ButtonStyle}>{uploading ? 'Uploading' : i18n.t('common:uploadSubmissionButton')}</Button>
+                                    style={ButtonStyle}>
+                                    {uploading ? i18n.t('common:uploadingSubmissionButton') :
+                                        i18n.t('common:startUploadSubmissionButton')}
+                                </Button>
                             </div>
                         )}
                 </div>

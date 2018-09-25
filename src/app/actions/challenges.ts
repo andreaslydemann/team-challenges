@@ -56,8 +56,6 @@ export namespace ChallengeActions {
       }];
 
       try {
-        //const { data } = await axios.get(`${BASE_URL}/todos/${ID}`);
-
         return dispatch({
           type: Type.GET_CHALLENGES_SUCCESS,
           payload: challenges
