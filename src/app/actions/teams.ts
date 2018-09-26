@@ -1,6 +1,7 @@
 import { Action, ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from '../reducers/state';
+import { UserActions } from './';
 
 export namespace TeamActions {
     export enum Type {
@@ -12,12 +13,14 @@ export namespace TeamActions {
         GET_TEAMS_OF_CHALLENGE_FAIL = 'GET_TEAMS_OF_CHALLENGE_FAIL',
     }
 
+    export const initTeams = () => (dispatch: Dispatch<any>) => {
+        dispatch(getTeams());
+        dispatch(UserActions.getUsers());
+    };
+
     export const getTeams: ActionCreator<ThunkAction<Action, RootState.TeamState, void>> = () => {
         return (dispatch: Dispatch<RootState.TeamState>): Action => {
-
-            dispatch({
-                type: Type.GET_TEAMS
-            });
+            dispatch({ type: Type.GET_TEAMS });
 
             const teams = [{
                 id: "team1",
@@ -33,9 +36,7 @@ export namespace TeamActions {
 
     export const getTeamsByChallengeId: ActionCreator<ThunkAction<Promise<Action>, RootState.TeamState, void>> = (challengeId: string) => {
         return async (dispatch: Dispatch<RootState.TeamState>): Promise<Action> => {
-            dispatch({
-                type: Type.GET_TEAMS_OF_CHALLENGE
-            });
+            dispatch({ type: Type.GET_TEAMS_OF_CHALLENGE });
 
             const teams = [{
                 id: "team1",

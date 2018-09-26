@@ -42,7 +42,7 @@ export class Submission extends React.Component<Props> {
     }
 
     render() {
-        const { name, description, file } = this.props.challengeState.challengeDetails;
+        const { name, file } = this.props.challengeState.challengeDetails;
         const { uploading, error } = this.props.submissionState;
 
         if (error !== '')
@@ -67,7 +67,7 @@ export class Submission extends React.Component<Props> {
                     ) : (
                             <div>
                                 <StyledTitle>{i18n.t('glossary:submissionTitle')} {name}</StyledTitle>
-                                <StyledDescription>{description}</StyledDescription>
+                                <StyledDescription>{i18n.t('glossary:submissionDescription')}</StyledDescription>
                                 <Upload.Dragger {...uploadConfig}>
                                     <p className="ant-upload-drag-icon"><Icon type="inbox" /></p>
                                     <p className="ant-upload-text">{i18n.t('glossary:submissionUploadHint1')}</p>

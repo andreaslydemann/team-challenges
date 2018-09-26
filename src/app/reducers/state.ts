@@ -3,7 +3,8 @@ import {
   ChallengeModel,
   RatingModel,
   SubmissionModel,
-  TeamModel
+  TeamModel,
+  UserModel
 } from '../models';
 
 export interface RootState {
@@ -11,6 +12,7 @@ export interface RootState {
   ratings: RootState.RatingState;
   submissions: RootState.SubmissionState;
   teams: RootState.TeamState;
+  users: RootState.UserState;
   router: RouterState;
 }
 
@@ -33,6 +35,10 @@ export namespace RootState {
   };
   export type TeamState = {
     teams: TeamModel[],
+    loading: boolean
+  };
+  export type UserState = {
+    users: UserModel[],
     loading: boolean
   };
 }

@@ -1,5 +1,5 @@
-import common from './common.json'
-import glossary from './glossary.json'
-import validation from './validation.json'
+import common from './common';
+import glossary from './glossary';
+import validation from './validation';
 
 export default { common, glossary, validation }

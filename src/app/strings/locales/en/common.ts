@@ -1,0 +1,21 @@
+export default {
+    headerItemChallenges: "Challenges",
+    headerItemTeams: "Teams",
+    headerItemSignOut: "Sign out",
+    resetButton: "Reset",
+    searchButton: "Search",
+    searchNamePlaceholder: "Search name",
+    searchTeamPlaceholder: "Search team",
+    submissionButton: "Submission",
+    tableColumnComment: "Comment",
+    tableColumnName: "Name",
+    tableColumnNumberOfMembers: "Number of members",
+    tableColumnScore: "Score",
+    tableColumnShow: "Show",
+    tableColumnStatus: "Status",
+    tableColumnTeam: "Team",
+    tableColumnTimeline: "Timeline",
+    tableColumnTimelineCompleted: "Completed",
+    startUploadSubmissionButton: "Upload submission",
+    uploadingSubmissionButton: "Uploading"
+}

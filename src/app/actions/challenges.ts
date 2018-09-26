@@ -102,7 +102,7 @@ export namespace ChallengeActions {
 
   export const selectFile = createAction<PartialPick<ChallengeModel.ChallengeDetailsModel, 'file'>>(Type.SELECT_FILE);
   export const removeFile = createAction(Type.REMOVE_FILE);
-  // export const deleteTodo = createAction<TodoModel['id']>(Type.DELETE_TODO);
+  // export const deleteChallenge = createAction<ChallengeModel['id']>(Type.DELETE_CHALLENGE);
 };
 
 export type ChallengeActions = Omit<typeof ChallengeActions, 'Type'>;
