@@ -16,7 +16,7 @@ const initialState: RootState.ChallengeState =
     name: '',
     description: '',
     createdAt: null,
-    file: {}
+    file: null
   },
   loading: false,
   error: ''

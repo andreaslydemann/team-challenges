@@ -42,9 +42,9 @@ export const submissionReducer = handleActions<RootState.SubmissionState, any>({
         (state: RootState.SubmissionState): RootState.SubmissionState => ({ ...state, uploading: true, error: '' }),
 
     [SubmissionActions.Type.SUBMIT_FILE_SUCCESS]:
-        (state: RootState.SubmissionState): RootState.SubmissionState => ({ ...state, uploading: false }),
+        (state: RootState.SubmissionState): RootState.SubmissionState => ({ ...state, uploading: false, error: '' }),
 
-    [SubmissionActions.Type.GET_SUBMISSIONS_OF_CHALLENGE_SUCCESS]:
+    [SubmissionActions.Type.SUBMIT_FILE_FAIL]:
         (state: RootState.SubmissionState, action: Action<string>): RootState.SubmissionState => {
             return { ...state, uploading: false, error: action.payload };
         },

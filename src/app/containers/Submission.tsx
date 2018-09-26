@@ -4,11 +4,10 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { ChallengeActions, SubmissionActions } from '../actions';
 import { RootState } from '../reducers';
-import { Upload, Button, Icon } from 'antd';
+import { Upload, Button, Icon, message } from 'antd';
 import { MainLayout, StyledTitle, StyledDescription } from '../components';
 import { omit } from '../utils';
 import i18n from '../strings/i18n';
-import { ChallengeModel } from '../models';
 
 interface MatchParams {
     id: string;
@@ -46,9 +45,8 @@ export class Submission extends React.Component<Props> {
         const { name, description, file } = this.props.challengeState.challengeDetails;
         const { uploading, error } = this.props.submissionState;
 
-        console.log(error)
-        //if (error !== '')
-        //  message.error(i18n.t(error));
+        if (error !== '')
+            message.error(i18n.t(error));
 
         const uploadConfig = {
             action: '',
@@ -58,7 +56,7 @@ export class Submission extends React.Component<Props> {
                 return false;
             },
             onRemove: () => { this.props.challengeActions.removeFile() },
-            fileList: file ? [file] as ChallengeModel.ChallengeDetailsModel[] : [] as any[]
+            fileList: file ? [file] as any[] : [] as any[]
         };
 
         return (
