@@ -7,5 +7,6 @@ export default {
         "cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     submissionTitle: "Submit to ",
     submissionUploadHint1: "Click or drag file to this area to upload",
-    submissionUploadHint2: "Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files"
+    submissionUploadHint2: "Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files",
+    teamsTitle: "Teams",
 }

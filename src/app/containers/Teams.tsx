@@ -2,19 +2,16 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router-dom';
-import { TeamActions } from '../actions';
+import { TeamActions, UserActions } from '../actions';
 import { RootState } from '../reducers';
-import { TeamModel } from '../models';
-import * as selectors from '../selectors';
 import { Skeleton } from 'antd';
 import { MainLayout, StyledTitle, TeamsTable } from '../components';
 import i18n from '../strings/i18n';
-import { omit } from '../utils';
 
 interface Props extends RouteComponentProps<void> {
-    teamsTableData: TeamModel.TeamsTableData[];
     state: RootState.TeamState;
     teamActions: TeamActions;
+    userActions: UserActions;
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -36,7 +33,7 @@ export class Teams extends React.Component<Props> {
                         <Skeleton active={true} />
                     ) : (
                             <TeamsTable
-                                data={this.props.teamsTableData}
+                                data={this.props.state.teams}
                             />
                         )}
                 </div>
@@ -45,10 +42,13 @@ export class Teams extends React.Component<Props> {
     }
 }
 
-function mapStateToProps(state: RootState): Pick<Props, 'state' | 'teamsTableData'> {
-    return { state: state.teams, teamsTableData: selectors.getTeamsTableData(state) };
+function mapStateToProps(state: RootState): Pick<Props, 'state'> {
+    return { state: state.teams };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<RootState.TeamState>): Pick<Props, 'teamActions'> {
-    return { teamActions: bindActionCreators(omit(TeamActions, 'Type'), dispatch) };
+function mapDispatchToProps(dispatch: Dispatch<RootState.TeamState>): Pick<Props, 'teamActions' | 'userActions'> {
+    return {
+        teamActions: bindActionCreators(TeamActions, dispatch),
+        userActions: bindActionCreators(UserActions, dispatch),
+    };
 }

@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { routerMiddleware } from 'react-router-redux';
 import ReduxThunk from 'redux-thunk';
 import { History } from 'history';
-import { logger } from '../middleware';
+import { logger } from './middleware';
 import { RootState, rootReducer } from '../reducers';
 
 export function configureStore(history: History, initialState?: RootState): Store<RootState> {

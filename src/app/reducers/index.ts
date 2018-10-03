@@ -3,7 +3,7 @@ import { RootState } from './state';
 import { challengeReducer } from './challenges';
 import { ratingReducer } from './ratings';
 import { submissionReducer } from './submissions';
-import { teamReducer } from './teams';
+import { teamReducer } from './team.reducer';
 import { userReducer } from './users';
 import { routerReducer, RouterState } from 'react-router-redux';
 

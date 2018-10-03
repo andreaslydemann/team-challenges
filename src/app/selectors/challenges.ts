@@ -1,14 +1,19 @@
 import { createSelector } from 'reselect';
 import * as _ from 'lodash';
-import { SubmissionModel } from '../models';
-import { RootState } from '../reducers';
 import { omit } from '../utils';
+import { RootState } from '../reducers';
+import {
+    SubmissionModel,
+    ChallengeModel,
+    RatingModel,
+    TeamModel
+} from '../models';
 
 export const getChallengesTableData = createSelector(
     (state: RootState) => state.challenges.challenges,
     (state: RootState) => state.submissions.submissions,
     (state: RootState) => state.ratings.ratings,
-    (challenges, submissions, ratings) => {
+    (challenges: ChallengeModel[], submissions: SubmissionModel[], ratings: RatingModel[]): ChallengeModel.ChallengesTableData[] => {
         const items = _.map(challenges, challenge => {
             const i = submissions.findIndex(x => x.challengeId === challenge.id)
 
@@ -31,7 +36,7 @@ export const getChallengeDetailsTableData = createSelector(
     (state: RootState) => state.teams.teams,
     (state: RootState) => state.submissions.submissions,
     (state: RootState) => state.ratings.ratings,
-    (teams, submissions, ratings) => {
+    (teams: TeamModel[], submissions: SubmissionModel[], ratings: RatingModel[]): ChallengeModel.ChallengeDetailsTableData[] => {
         const items = _.map(teams, team => {
             const i = submissions.findIndex(x => x.teamId === team.id)
 

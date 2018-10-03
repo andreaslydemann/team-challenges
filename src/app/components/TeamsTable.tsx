@@ -17,6 +17,14 @@ export class TeamsTable extends React.Component<Props, State> {
         super(props, context);
     }
 
+    renderButtons = (key: string) => {
+        return (
+            <Button onClick={() => this.props.showChallengeDetails(key)}>
+                Request to join
+            </Button>
+        );
+    };
+
     render() {
         this.state = { searchText: '' };
         let searchInput: any;
@@ -35,6 +43,7 @@ export class TeamsTable extends React.Component<Props, State> {
             title: i18n.t('common:tableColumnName'),
             dataIndex: 'name',
             key: 'name',
+            width: '55%',
             filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }:
                 { setSelectedKeys: (array: any[]) => any, selectedKeys: number[], confirm: () => void, clearFilters: () => void }) => (
                     <StyledContainer>
@@ -86,24 +95,27 @@ export class TeamsTable extends React.Component<Props, State> {
             title: i18n.t('common:tableColumnNumberOfMembers'),
             dataIndex: 'numberOfMembers',
             key: 'numberOfMembers',
+            width: '25%',
             render: (numberOfMembers: number) => {
                 if (numberOfMembers !== null) {
-                    return <span>{numberOfMembers} members</span>
+                    return <span>{numberOfMembers} {numberOfMembers === 1 ?
+                        i18n.t('common:tableCellMember') : i18n.t('common:tableCellMembers')}</span>
                 } else { return <span /> }
             },
         }, {
             title: '',
             key: 'action',
             dataIndex: '',
-            render: (text: string, record: any) => (
-                <Button onClick={() => this.props.showChallengeDetails(record.key)}>
-                    {i18n.t('common:tableColumnShow')}
-                </Button>
-            ),
+            render: (text: string, record: any) => this.renderButtons(record.key)
         }];
 
         return (
-            <Table columns={columns} dataSource={this.props.data} />
+            <Table
+                key="id"
+                columns={columns}
+                expandedRowRender={record => <p style={{ margin: 0 }}>{record.numberOfMembers}</p>}
+                dataSource={this.props.data}
+            />
         );
     }
 }

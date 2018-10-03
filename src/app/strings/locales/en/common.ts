@@ -7,6 +7,8 @@ export default {
     searchNamePlaceholder: "Search name",
     searchTeamPlaceholder: "Search team",
     submissionButton: "Submission",
+    tableCellMember: "member",
+    tableCellMembers: "members",
     tableColumnComment: "Comment",
     tableColumnName: "Name",
     tableColumnNumberOfMembers: "Number of members",
