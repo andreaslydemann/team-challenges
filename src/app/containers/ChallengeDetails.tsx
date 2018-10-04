@@ -14,7 +14,6 @@ import {
     StyledDescription
 } from '../components';
 import i18n from '../strings/i18n';
-import { omit } from '../utils';
 
 interface MatchParams {
     id: string;
@@ -67,7 +66,7 @@ function mapStateToProps(state: RootState): Pick<Props, 'state' | 'challengesTab
 }
 
 function mapDispatchToProps(dispatch: Dispatch<RootState.ChallengeState>): Pick<Props, 'challengeActions'> {
-    return { challengeActions: bindActionCreators(omit(ChallengeActions, 'Type'), dispatch) };
+    return { challengeActions: bindActionCreators(ChallengeActions, dispatch) };
 }
 
 const ButtonStyle: React.CSSProperties = {

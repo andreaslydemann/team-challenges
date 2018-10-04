@@ -6,7 +6,6 @@ import { ChallengeActions, SubmissionActions } from '../actions';
 import { RootState } from '../reducers';
 import { Upload, Button, Icon, message } from 'antd';
 import { MainLayout, StyledTitle, StyledDescription } from '../components';
-import { omit } from '../utils';
 import i18n from '../strings/i18n';
 
 interface MatchParams {
@@ -95,8 +94,8 @@ function mapStateToProps(state: RootState): Pick<Props, 'challengeState' | 'subm
 
 function mapDispatchToProps(dispatch: Dispatch<RootState.ChallengeState>): Pick<Props, 'challengeActions' | 'submissionActions'> {
     return {
-        challengeActions: bindActionCreators(omit(ChallengeActions, 'Type'), dispatch),
-        submissionActions: bindActionCreators(omit(SubmissionActions, 'Type'), dispatch)
+        challengeActions: bindActionCreators(ChallengeActions, dispatch),
+        submissionActions: bindActionCreators(SubmissionActions, dispatch)
     };
 }
 

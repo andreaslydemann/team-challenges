@@ -1,7 +1,7 @@
 import { handleActions, Action } from 'redux-actions';
 import { RootState } from './state';
 import { SubmissionModel } from '../models';
-import { SubmissionActions } from '../actions';
+import { SubmissionConstants } from '../constants';
 
 const initialState: RootState.SubmissionState =
 {
@@ -18,33 +18,33 @@ const initialState: RootState.SubmissionState =
 };
 
 export const submissionReducer = handleActions<RootState.SubmissionState, any>({
-    [SubmissionActions.Type.GET_SUBMISSIONS_OF_TEAM]:
+    [SubmissionConstants.GET_SUBMISSIONS_OF_TEAM_REQUEST]:
         (state: RootState.SubmissionState): RootState.SubmissionState => {
             return { ...state, loading: true };
         },
 
-    [SubmissionActions.Type.GET_SUBMISSIONS_OF_TEAM_SUCCESS]:
+    [SubmissionConstants.GET_SUBMISSIONS_OF_TEAM_SUCCESS]:
         (state: RootState.SubmissionState, action: Action<SubmissionModel[]>): RootState.SubmissionState => {
             return { ...state, submissions: action.payload, loading: false };
         },
 
-    [SubmissionActions.Type.GET_SUBMISSIONS_OF_CHALLENGE]:
+    [SubmissionConstants.GET_SUBMISSIONS_OF_CHALLENGE_REQUEST]:
         (state: RootState.SubmissionState): RootState.SubmissionState => {
             return { ...state, loading: true };
         },
 
-    [SubmissionActions.Type.GET_SUBMISSIONS_OF_CHALLENGE_SUCCESS]:
+    [SubmissionConstants.GET_SUBMISSIONS_OF_CHALLENGE_SUCCESS]:
         (state: RootState.SubmissionState, action: Action<SubmissionModel[]>): RootState.SubmissionState => {
             return { ...state, submissions: action.payload, loading: false };
         },
 
-    [SubmissionActions.Type.SUBMIT_FILE]:
+    [SubmissionConstants.SUBMIT_FILE_REQUEST]:
         (state: RootState.SubmissionState): RootState.SubmissionState => ({ ...state, uploading: true, error: '' }),
 
-    [SubmissionActions.Type.SUBMIT_FILE_SUCCESS]:
+    [SubmissionConstants.SUBMIT_FILE_SUCCESS]:
         (state: RootState.SubmissionState): RootState.SubmissionState => ({ ...state, uploading: false, error: '' }),
 
-    [SubmissionActions.Type.SUBMIT_FILE_FAIL]:
+    [SubmissionConstants.SUBMIT_FILE_FAILURE]:
         (state: RootState.SubmissionState, action: Action<string>): RootState.SubmissionState => {
             return { ...state, uploading: false, error: action.payload };
         },

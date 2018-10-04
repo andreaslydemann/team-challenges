@@ -1,2 +1,2 @@
-export * from './challenges';
-export * from './teams';
+export * from './challenge.selectors';
+export * from './team.selectors';

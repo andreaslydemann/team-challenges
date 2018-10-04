@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import { RootState } from './state';
-import { challengeReducer } from './challenges';
-import { ratingReducer } from './ratings';
-import { submissionReducer } from './submissions';
+import { challengeReducer } from './challenge.reducer';
+import { ratingReducer } from './rating.reducer';
+import { submissionReducer } from './submission.reducer';
 import { teamReducer } from './team.reducer';
-import { userReducer } from './users';
+import { userReducer } from './user.reducer';
 import { routerReducer, RouterState } from 'react-router-redux';
 
 export { RootState, RouterState };
