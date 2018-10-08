@@ -6,7 +6,7 @@ import { TeamActions, UserActions } from '../actions';
 import { RootState } from '../reducers';
 import { Skeleton } from 'antd';
 import { MainLayout, StyledTitle, TeamsTable } from '../components';
-import i18n from '../strings/i18n';
+import i18n from '../../assets/translations/i18n';
 
 interface Props extends RouteComponentProps<void> {
     state: RootState.TeamState;

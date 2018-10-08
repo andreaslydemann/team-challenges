@@ -13,7 +13,7 @@ import {
     StyledTitle,
     StyledDescription
 } from '../components';
-import i18n from '../strings/i18n';
+import i18n from '../../assets/translations/i18n';
 
 interface MatchParams {
     id: string;

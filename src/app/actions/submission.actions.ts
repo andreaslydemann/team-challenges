@@ -2,7 +2,7 @@ import { Action, ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from '../reducers/state';
 import { SubmissionModel } from '../models';
-import { SubmissionConstants } from '../constants';
+import { SubmissionTypes } from '../types';
 import { SubmissionService } from '../services';
 
 export namespace SubmissionActions {
@@ -19,9 +19,9 @@ export namespace SubmissionActions {
             };
         };
 
-        function request() { return { type: SubmissionConstants.GET_SUBMISSIONS_REQUEST } }
-        function success(submissions: SubmissionModel[]) { return { type: SubmissionConstants.GET_SUBMISSIONS_SUCCESS, payload: submissions } }
-        function failure(error: string) { return { type: SubmissionConstants.GET_SUBMISSIONS_FAILURE, payload: error } }
+        function request() { return { type: SubmissionTypes.GET_SUBMISSIONS_REQUEST } }
+        function success(submissions: SubmissionModel[]) { return { type: SubmissionTypes.GET_SUBMISSIONS_SUCCESS, payload: submissions } }
+        function failure(error: string) { return { type: SubmissionTypes.GET_SUBMISSIONS_FAILURE, payload: error } }
     };
 
     export const getSubmissionsByTeamId: ActionCreator<ThunkAction<Promise<Action>, RootState.SubmissionState, void>> = (teamId: string) => {
@@ -37,9 +37,9 @@ export namespace SubmissionActions {
             };
         };
 
-        function request() { return { type: SubmissionConstants.GET_SUBMISSIONS_OF_TEAM_REQUEST } }
-        function success(submissions: SubmissionModel[]) { return { type: SubmissionConstants.GET_SUBMISSIONS_OF_TEAM_SUCCESS, payload: submissions } }
-        function failure(error: string) { return { type: SubmissionConstants.GET_SUBMISSIONS_OF_TEAM_FAILURE, payload: error } }
+        function request() { return { type: SubmissionTypes.GET_SUBMISSIONS_OF_TEAM_REQUEST } }
+        function success(submissions: SubmissionModel[]) { return { type: SubmissionTypes.GET_SUBMISSIONS_OF_TEAM_SUCCESS, payload: submissions } }
+        function failure(error: string) { return { type: SubmissionTypes.GET_SUBMISSIONS_OF_TEAM_FAILURE, payload: error } }
     };
 
     export const getSubmissionsByChallengeId: ActionCreator<ThunkAction<Promise<Action>, RootState.SubmissionState, void>> = (challengeId: string) => {
@@ -55,9 +55,9 @@ export namespace SubmissionActions {
             };
         };
 
-        function request() { return { type: SubmissionConstants.GET_SUBMISSIONS_OF_CHALLENGE_REQUEST } }
-        function success(submissions: SubmissionModel[]) { return { type: SubmissionConstants.GET_SUBMISSIONS_OF_CHALLENGE_SUCCESS, payload: submissions } }
-        function failure(error: string) { return { type: SubmissionConstants.GET_SUBMISSIONS_OF_CHALLENGE_FAILURE, payload: error } }
+        function request() { return { type: SubmissionTypes.GET_SUBMISSIONS_OF_CHALLENGE_REQUEST } }
+        function success(submissions: SubmissionModel[]) { return { type: SubmissionTypes.GET_SUBMISSIONS_OF_CHALLENGE_SUCCESS, payload: submissions } }
+        function failure(error: string) { return { type: SubmissionTypes.GET_SUBMISSIONS_OF_CHALLENGE_FAILURE, payload: error } }
     };
 
     export const submitFile: ActionCreator<ThunkAction<Promise<Action>, RootState.SubmissionState, void>> = (data: FormData, callback: () => void) => {
@@ -79,9 +79,9 @@ export namespace SubmissionActions {
             };
         };
 
-        function request() { return { type: SubmissionConstants.SUBMIT_FILE_REQUEST } }
-        function success() { return { type: SubmissionConstants.SUBMIT_FILE_SUCCESS } }
-        function failure(error: string) { return { type: SubmissionConstants.SUBMIT_FILE_FAILURE, payload: error } }
+        function request() { return { type: SubmissionTypes.SUBMIT_FILE_REQUEST } }
+        function success() { return { type: SubmissionTypes.SUBMIT_FILE_SUCCESS } }
+        function failure(error: string) { return { type: SubmissionTypes.SUBMIT_FILE_FAILURE, payload: error } }
     };
 };
 

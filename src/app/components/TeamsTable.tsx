@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Table, Input, Button, Icon } from 'antd';
-import i18n from '../strings/i18n';
+import i18n from '../../assets/translations/i18n';
 
 interface Props {
     data: object[],

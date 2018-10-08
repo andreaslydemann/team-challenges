@@ -1,4 +1,4 @@
-export enum TeamConstants {
+export enum TeamTypes {
     GET_TEAMS_REQUEST = 'GET_TEAMS_REQUEST',
     GET_TEAMS_SUCCESS = 'GET_TEAMS_SUCCESS',
     GET_TEAMS_FAILURE = 'GET_TEAMS_FAILURE',

@@ -6,7 +6,7 @@ import { ChallengeActions, SubmissionActions } from '../actions';
 import { RootState } from '../reducers';
 import { Upload, Button, Icon, message } from 'antd';
 import { MainLayout, StyledTitle, StyledDescription } from '../components';
-import i18n from '../strings/i18n';
+import i18n from '../../assets/translations/i18n';
 
 interface MatchParams {
     id: string;

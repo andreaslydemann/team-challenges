@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Menu, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import i18n from '../strings/i18n';
+import i18n from '../../assets/translations/i18n';
 
 interface Props {
     location: Location

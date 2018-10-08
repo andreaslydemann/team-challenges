@@ -1,7 +1,7 @@
 import { handleActions, Action } from 'redux-actions';
 import { RootState } from './state';
 import { UserModel } from '../models';
-import { UserConstants } from '../constants';
+import { UserTypes } from '../types';
 
 const initialState: RootState.UserState =
 {
@@ -23,22 +23,22 @@ export interface UserModel {
 }
 
 export const userReducer = handleActions<RootState.UserState, UserModel[]>({
-    [UserConstants.GET_USERS_REQUEST]:
+    [UserTypes.GET_USERS_REQUEST]:
         (state: RootState.UserState): RootState.UserState => {
             return { ...state, loading: true };
         },
 
-    [UserConstants.GET_USERS_SUCCESS]:
+    [UserTypes.GET_USERS_SUCCESS]:
         (state: RootState.UserState, action: Action<UserModel[]>): RootState.UserState => {
             return { ...state, users: action.payload, loading: false };
         },
 
-    [UserConstants.GET_USERS_OF_TEAM_REQUEST]:
+    [UserTypes.GET_USERS_OF_TEAM_REQUEST]:
         (state: RootState.UserState): RootState.UserState => {
             return { ...state, loading: true };
         },
 
-    [UserConstants.GET_USERS_OF_TEAM_SUCCESS]:
+    [UserTypes.GET_USERS_OF_TEAM_SUCCESS]:
         (state: RootState.UserState, action: Action<UserModel[]>): RootState.UserState => {
             return { ...state, users: action.payload, loading: false };
         },

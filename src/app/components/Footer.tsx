@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import i18n from '../strings/i18n';
+import i18n from '../../assets/translations/i18n';
 
 export function Footer() {
     return (

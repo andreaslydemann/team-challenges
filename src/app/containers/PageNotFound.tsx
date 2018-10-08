@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { MainLayout, StyledTitle } from '../components';
 import styled from 'styled-components';
-import i18n from '../strings/i18n';
-import img from '../../assets/yay.jpg';
+import i18n from '../../assets/translations/i18n';
+import img from '../../assets/images/yay.jpg';
 
 interface Props {
     children: JSX.Element,

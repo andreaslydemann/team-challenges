@@ -8,7 +8,7 @@ import { ChallengeModel } from '../models';
 import * as selectors from '../selectors';
 import { Skeleton } from 'antd';
 import { MainLayout, ChallengesTable, StyledTitle } from '../components';
-import i18n from '../strings/i18n';
+import i18n from '../../assets/translations/i18n';
 
 interface Props extends RouteComponentProps<void> {
     challengesTableData: ChallengeModel.ChallengesTableData[];

@@ -1,76 +1,55 @@
 
-/*import { Action, ActionCreator, Dispatch } from 'redux';
+import { Action, ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from '../reducers/state';
-// import jwt from 'jsonwebtoken';
-import setAuthToken from '../utils/setAuthToken';
-import { UserConstants } from '../constants';
+import { AuthTypes } from '../types';
+import { AuthService } from '../services';
+import { UserModel } from '../models';
 
 export namespace UserActions {
-    export function setCurrentUser(currentUser: any) {
-        return {
-            type: SET_CURRENT_USER,
-            user: currentUser,
-            authenticated: true
-        };
-    }
-
-    export function unsetCurrentUser() {
-        return {
-            type: UNAUTH_USER,
-            user: {},
-            authenticated: false
-        };
-    }
-
     export const signIn: ActionCreator<ThunkAction<Promise<Action>, RootState.TeamState, void>> = () => {
         return async (dispatch: Dispatch<RootState.TeamState>): Promise<Action> => {
-            dispatch({ type: Type.SIGN_IN_USER });
+            dispatch(request());
 
             try {
-                //const {data} = await axios.post(`${BASE_URL}/signIn`, userDetails);
-                //dispatch({ type: Type.SIGN_IN_USER_SUCCESS });
-                //const token = data.Token;
-                //sessionStorage.setItem('token', token);
-                //setAuthToken(token);
-                //const decoded = jwt.decode(data.Token);
-                //dispatch(setCurrentUser(decoded.currentUser));
+                const user = await AuthService.signIn();
 
+                return dispatch(success(user));
             } catch (err) {
-                console.log(err);
+                return failure('validation:genericErrorMessage');
             }
         };
 
-        function request() { return { type: Type.GET_USERS } }
+        function request() { return { type: AuthTypes.SIGN_IN_REQUEST } }
+        function success(user: UserModel) { return { type: AuthTypes.SIGN_IN_SUCCESS, payload: user } }
+        function failure(error: string) { return { type: AuthTypes.SIGN_IN_FAILURE, payload: error } }
     };
 
     export const register: ActionCreator<ThunkAction<Promise<Action>, RootState.TeamState, void>> = () => {
         return async (dispatch: Dispatch<RootState.TeamState>): Promise<Action> => {
-            dispatch({ type: Type.REGISTER_USER });
+            dispatch(request());
 
             try {
-                //const {data} = await axios.post(`${BASE_URL}/signUp`, userDetails);
-                //dispatch({ type: Type.REGISTER_USER_SUCCESS });
-                //const token = data.Token;
-                //sessionStorage.setItem('token', token);
-                //setAuthToken(token);
-                //const decoded = jwt.decode(data.Token);
-                //dispatch(setCurrentUser(decoded.currentUser));
+                await AuthService.register();
 
+                return dispatch(success());
             } catch (err) {
-                console.log(err.response.data.message);
+                return dispatch(failure('validation:genericErrorMessage'));
             }
         };
+
+        function request() { return { type: AuthTypes.REGISTER_REQUEST } }
+        function success() { return { type: AuthTypes.REGISTER_SUCCESS } }
+        function failure(error: string) { return { type: AuthTypes.REGISTER_FAILURE, payload: error } }
     };
 
-    export const signOut: ActionCreator<ThunkAction<Promise<Action>, RootState.TeamState, void>> = () => {
-        return async (dispatch: Dispatch<RootState.TeamState>): Promise<Action> => {
-            sessionStorage.setItem('token', null);
-            setAuthToken(false);
-            dispatch(unsetCurrentUser());
+    export const signOut: ActionCreator<ThunkAction<Action, RootState.TeamState, void>> = () => {
+        return (dispatch: Dispatch<RootState.TeamState>): Action => {
+            AuthService.signOut();
+
+            return dispatch({ type: AuthTypes.SIGN_OUT });
         };
     };
-
 };
 
-export type UserActions = Omit<typeof UserActions, 'Type'>;*/
+export type UserActions = typeof UserActions;

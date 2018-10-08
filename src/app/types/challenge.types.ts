@@ -1,4 +1,4 @@
-export enum ChallengeConstants {
+export enum ChallengeTypes {
     GET_CHALLENGES_REQUEST = 'GET_CHALLENGES_REQUEST',
     GET_CHALLENGES_SUCCESS = 'GET_CHALLENGES_SUCCESS',
     GET_CHALLENGES_FAILURE = 'GET_CHALLENGES_FAILURE',
@@ -7,4 +7,4 @@ export enum ChallengeConstants {
     GET_CHALLENGE_FAILURE = 'GET_CHALLENGE_FAILURE',
     SELECT_FILE = 'SELECT_FILE',
     REMOVE_FILE = 'REMOVE_FILE'
-  }
+}
