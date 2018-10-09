@@ -13,15 +13,6 @@ const initialState: RootState.UserState =
     loading: false
 };
 
-export interface UserModel {
-    id: string;
-    username: string;
-    email: string;
-    password: string;
-    isAdmin: boolean;
-    teamId: string;
-}
-
 export const userReducer = handleActions<RootState.UserState, UserModel[]>({
     [UserTypes.GET_USERS_REQUEST]:
         (state: RootState.UserState): RootState.UserState => {

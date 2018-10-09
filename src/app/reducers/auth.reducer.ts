@@ -14,15 +14,6 @@ const initialState: RootState.AuthState =
     loading: false
 };
 
-export interface UserModel {
-    id: string;
-    username: string;
-    email: string;
-    password: string;
-    isAdmin: boolean;
-    teamId: string;
-}
-
 export const authReducer = handleActions<RootState.AuthState, any>({
     [AuthTypes.SIGN_IN_REQUEST]:
         (state: RootState.AuthState): RootState.AuthState => {

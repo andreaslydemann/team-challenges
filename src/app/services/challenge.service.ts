@@ -1,8 +1,10 @@
 //import axios from 'axios';
 
 export namespace ChallengeService {
+//const BASE_URL = "https://team-challenges.com/api"
+
     export function getChallenges() {
-        //return axios.post(`${BASE_URL}/submitFile`, data).then(handleResponse);
+        //return axios.get(`${BASE_URL}/getChallenges`).then(handleResponse);
 
         const challenges = [{
             id: "ch1",
@@ -43,13 +45,13 @@ export namespace ChallengeService {
     }
 
     /*
-    function handleResponse(response) {
-        return response.text().then(text => {
+    function handleResponse(response: any) {
+        return response.text().then((text: string) => {
             const data = text && JSON.parse(text);
             if (!response.ok) {
                 if (response.status === 401) {
                     // auto logout if 401 response returned from api
-                    logout();
+                    //logout();
                     location.reload(true);
                 }
     

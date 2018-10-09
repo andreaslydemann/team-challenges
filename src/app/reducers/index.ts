@@ -1,12 +1,14 @@
+import { routerReducer, RouterState } from 'react-router-redux';
 import { combineReducers } from 'redux';
 import { RootState } from './state';
+
+// Reducers
 import { challengeReducer } from './challenge.reducer';
 import { ratingReducer } from './rating.reducer';
 import { submissionReducer } from './submission.reducer';
 import { teamReducer } from './team.reducer';
 import { userReducer } from './user.reducer';
 import { authReducer } from './auth.reducer';
-import { routerReducer, RouterState } from 'react-router-redux';
 
 export { RootState, RouterState };
 
